@@ -14,7 +14,7 @@ int main(int argc, char* argv[])
 	
 	E->QueueState(new StateTest);
 
-	WiimoteBindings::connectWiimote();
+	//WiimoteBindings::connectWiimote();
 	while(E->Running())
 	{
 		E->Update();
