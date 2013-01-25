@@ -1,0 +1,22 @@
+﻿Build started 2013-01-21 20:07:54.
+     1>Project "C:\Users\Master Kenth\Dropbox\HGO\v13-1-sd1002-50787 Introduktion till spelutveckling\Programmering\SFML_Test\SFML_Test.vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Creating "Release\SFML_Test.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         All outputs are up-to-date.
+       Link:
+         All outputs are up-to-date.
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Master Kenth\Dropbox\HGO\v13-1-sd1002-50787 Introduktion till spelutveckling\Programmering\Release\SFML_Test.exe" /INCREMENTAL:NO /NOLOGO "sfml-main.lib" "sfml-graphics.lib" "sfml-system.lib" "sfml-window.lib" "sfml-audio.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Release\SFML_Test.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\Master Kenth\Dropbox\HGO\v13-1-sd1002-50787 Introduktion till spelutveckling\Programmering\Release\SFML_Test.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Master Kenth\Dropbox\HGO\v13-1-sd1002-50787 Introduktion till spelutveckling\Programmering\Release\SFML_Test.lib" /MACHINE:X86 Release\Main.obj
+         Generating code
+         Finished generating code
+         SFML_Test.vcxproj -> C:\Users\Master Kenth\Dropbox\HGO\v13-1-sd1002-50787 Introduktion till spelutveckling\Programmering\Release\SFML_Test.exe
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"C:\Users\Master Kenth\Dropbox\HGO\v13-1-sd1002-50787 Introduktion till spelutveckling\Programmering\Release\SFML_Test.exe;#1" /manifest Release\SFML_Test.exe.intermediate.manifest
+       FinalizeBuildStatus:
+         Deleting file "Release\SFML_Test.unsuccessfulbuild".
+         Touching "Release\SFML_Test.lastbuildstate".
+     1>Done Building Project "C:\Users\Master Kenth\Dropbox\HGO\v13-1-sd1002-50787 Introduktion till spelutveckling\Programmering\SFML_Test\SFML_Test.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:01.01
