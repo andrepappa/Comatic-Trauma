@@ -1,6 +1,7 @@
 #include "PhoenixEngine/Core/PhoenixEngine.h"
 
 #include "StateTest.h"
+#include "LevelOne.h"
 
 #include "WiimoteBindings.h"
 int main(int argc, char* argv[])
@@ -13,7 +14,6 @@ int main(int argc, char* argv[])
 	E->Init();
 	
 	E->QueueState(new StateTest);
-
 	//WiimoteBindings::connectWiimote();
 	while(E->Running())
 	{

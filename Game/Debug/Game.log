@@ -1,21 +1,17 @@
-﻿Build started 2013-01-25 19:52:56.
-     1>Project "C:\Users\Master Kenth\Documents\GitHub\Comatic-Trauma\Game\Game.vcxproj" on node 2 (build target(s)).
+﻿Build started 25.01.2013 20:47:12.
+     1>Project "E:\Github\Comatic-Trauma\Game\Game.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug\Game.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt Main.cpp PhoenixEngine\Core\ImageManager.cpp PhoenixEngine\Core\PhoenixEngine.cpp StateTest.cpp WiimoteBindings.cpp wiiyourself\wiimote.cpp
-         wiimote.cpp
-         WiimoteBindings.cpp
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt LevelOne.cpp StateTest.cpp
          StateTest.cpp
-         PhoenixEngine.cpp
-     1>c:\users\master kenth\documents\github\comatic-trauma\game\phoenixengine\core\phoenixengine.cpp(16): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
-         ImageManager.cpp
-         Main.cpp
+         LevelOne.cpp
          Generating Code...
        ManifestResourceCompile:
-         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /nologo /fo"Debug\Game.exe.embed.manifest.res" Debug\Game_manifest.rc 
+         All outputs are up-to-date.
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Master Kenth\Documents\GitHub\Comatic-Trauma\Debug\Game.exe" /INCREMENTAL /NOLOGO setupapi.lib winmm.lib hid.lib "sfml-main-d.lib" "sfml-graphics-d.lib" "sfml-system-d.lib" "sfml-window-d.lib" "sfml-audio-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\Game.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\Master Kenth\Documents\GitHub\Comatic-Trauma\Debug\Game.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Master Kenth\Documents\GitHub\Comatic-Trauma\Debug\Game.lib" /MACHINE:X86 Debug\Game.exe.embed.manifest.res
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Github\Comatic-Trauma\Debug\Game.exe" /INCREMENTAL /NOLOGO setupapi.lib winmm.lib hid.lib "sfml-main-d.lib" "sfml-graphics-d.lib" "sfml-system-d.lib" "sfml-window-d.lib" "sfml-audio-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\Game.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"E:\Github\Comatic-Trauma\Debug\Game.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Github\Comatic-Trauma\Debug\Game.lib" /MACHINE:X86 Debug\Game.exe.embed.manifest.res
+         Debug\LevelOne.obj
          Debug\Main.obj
          Debug\ImageManager.obj
          Debug\PhoenixEngine.obj
@@ -23,22 +19,16 @@
          Debug\WiimoteBindings.obj
          Debug\wiimote.obj
        Manifest:
-         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"Debug\Game.exe.embed.manifest" /manifest Debug\Game.exe.intermediate.manifest
-         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /nologo /fo"Debug\Game.exe.embed.manifest.res" Debug\Game_manifest.rc 
+         c:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"Debug\Game.exe.embed.manifest" /manifest Debug\Game.exe.intermediate.manifest
+         All outputs are up-to-date.
        LinkEmbedManifest:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Master Kenth\Documents\GitHub\Comatic-Trauma\Debug\Game.exe" /INCREMENTAL /NOLOGO setupapi.lib winmm.lib hid.lib "sfml-main-d.lib" "sfml-graphics-d.lib" "sfml-system-d.lib" "sfml-window-d.lib" "sfml-audio-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\Game.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\Master Kenth\Documents\GitHub\Comatic-Trauma\Debug\Game.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Master Kenth\Documents\GitHub\Comatic-Trauma\Debug\Game.lib" /MACHINE:X86 Debug\Game.exe.embed.manifest.res
-         Debug\Main.obj
-         Debug\ImageManager.obj
-         Debug\PhoenixEngine.obj
-         Debug\StateTest.obj
-         Debug\WiimoteBindings.obj
-         Debug\wiimote.obj
-         Game.vcxproj -> C:\Users\Master Kenth\Documents\GitHub\Comatic-Trauma\Debug\Game.exe
+         All outputs are up-to-date.
+         Game.vcxproj -> E:\Github\Comatic-Trauma\Debug\Game.exe
        FinalizeBuildStatus:
          Deleting file "Debug\Game.unsuccessfulbuild".
          Touching "Debug\Game.lastbuildstate".
-     1>Done Building Project "C:\Users\Master Kenth\Documents\GitHub\Comatic-Trauma\Game\Game.vcxproj" (build target(s)).
+     1>Done Building Project "E:\Github\Comatic-Trauma\Game\Game.vcxproj" (build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:05.70
+Time Elapsed 00:00:01.60

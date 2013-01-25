@@ -1,6 +1,7 @@
 #pragma once
 
 #include "PhoenixEngine/Core/GameState.h"
+#include <iostream>
 
 class StateTest : public GameState
 {

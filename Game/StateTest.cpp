@@ -1,6 +1,7 @@
 #include "StateTest.h"
 
 #include "PhoenixEngine/Core/PhoenixEngine.h"
+#include "LevelOne.h"
 #include <SFML/Graphics.hpp>
 
 sf::Font StateTest_Font;
@@ -34,6 +35,12 @@ void StateTest::Update(sf::Time DeltaTime)
 
 void StateTest::HandleEvents(sf::Event EventHandle)
 {
+
+if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+	{
+			PhoenixEngine::GetInstance()->QueueState(new LevelOne);
+			std::cout << "test";
+	}
 
 }
 
