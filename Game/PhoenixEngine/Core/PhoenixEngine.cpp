@@ -152,7 +152,7 @@ void PhoenixEngine::Draw()
 	m_DisplayWindow.clear();
 
 	if(m_CurrentState != nullptr)
-		m_CurrentState->Draw();
+		m_CurrentState->Draw(&m_DisplayWindow);
 
 	m_DisplayWindow.display();
 }

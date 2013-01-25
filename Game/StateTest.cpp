@@ -44,8 +44,8 @@ if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 
 }
 
-void StateTest::Draw()
+void StateTest::Draw(sf::RenderWindow* Window)
 {
-	PhoenixEngine::GetWindow()->draw(StateTest_Text1);
-	PhoenixEngine::GetWindow()->draw(StateTest_Text2);
+	Window->draw(StateTest_Text1);
+	Window->draw(StateTest_Text2);
 }

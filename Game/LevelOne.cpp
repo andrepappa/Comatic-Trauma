@@ -29,7 +29,7 @@ void LevelOne::HandleEvents(sf::Event EventHandle)
 
 }
 
-void LevelOne::Draw()
+void LevelOne::Draw(sf::RenderWindow* Window)
 {
 
 

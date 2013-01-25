@@ -11,5 +11,5 @@ class StateTest : public GameState
 
 		virtual void Update(sf::Time DeltaTime) override;
 		virtual void HandleEvents(sf::Event EventHandle) override;
-		virtual void Draw() override;
+		virtual void Draw(sf::RenderWindow* Window) override;
 };

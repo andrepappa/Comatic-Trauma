@@ -8,6 +8,6 @@ class Object
 	public:
 		virtual void Update(sf::Time DeltaTime) = 0;
 		virtual void HandleEvents(sf::Event EventHandle) = 0;
-		virtual void Draw() = 0;
+		virtual void Draw(sf::RenderWindow* Window) = 0;
 		virtual ~Object(){};
 };
