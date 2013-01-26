@@ -4,6 +4,7 @@
 #include "GameObject.h"
 #include "Player.h"
 #include <iostream>
+#include "AnimManager.h"
 
 
 class LevelOne :
@@ -20,6 +21,12 @@ public:
 protected:
 	std::vector<GameObject*> m_LOObjects;
 	sf::View* Camera;
+	AnimManager* Anims;
+	sf::Sprite* BgAnim;
+	sf::Sprite* StaticOverlay;
+	int BgAnimIndex;
+	std::vector<sf::Texture*> m_SmokeBorder;
+	sf::Sprite* m_SmokeSprite;
 
 };
 

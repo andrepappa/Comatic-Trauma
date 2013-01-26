@@ -29,6 +29,11 @@ class AnimManager
 			return Anims.size()-1;
 		}
 
+		int CurFrame(int Index)
+		{
+			return Anims[Index]->CurFrame();
+		}
+
 		sf::IntRect* GetFrame(int Index)
 		{
 			return Anims[Index]->GetFrame();
@@ -63,6 +68,7 @@ class AnimManager
 				int FrameDelay;
 				std::vector<sf::IntRect*> Frames;
 
+				int CurFrame(){ return CurrentFrame; }
 				sf::IntRect* GetFrame(){ return Frames[CurrentFrame]; }
 				bool NewFrame(){ return LastFrame != CurrentFrame; }
 
