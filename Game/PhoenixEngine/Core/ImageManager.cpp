@@ -18,7 +18,7 @@ bool** ImageManager::RequestCollisionData(const sf::Texture* Tex)
 	return nullptr;
 }
 
-sf::Texture* ImageManager::RequestTexture(std::string Path, bool bPersistent)
+sf::Texture* ImageManager::RequestTexture(std::string Path, bool bLoadAsTexture, bool bPersistent)
 {
 	for(unsigned int i = 0; i < Textures.size(); i++)
 	{
@@ -31,43 +31,50 @@ sf::Texture* ImageManager::RequestTexture(std::string Path, bool bPersistent)
 
 	TextureObject* TexObj = new TextureObject();
 	sf::Image* Img = new sf::Image();
+	sf::Texture* Tex = new sf::Texture();
 	bool** tempsize;
-	if(Img->loadFromFile(Path))
+	if(!bLoadAsTexture)
 	{
-		bool** CD = new bool *[Img->getSize().x];
-		tempsize = CD;	
-		Util::msgNote(Util::BuildString("New image loaded: %s", Path.c_str()));
-		for (int x = 0; x < Img->getSize().x; x++)
+		if(Img->loadFromFile(Path))
 		{
-			CD[x] = new bool[Img->getSize().y];
+			bool** CD = new bool *[Img->getSize().x];
+			tempsize = CD;	
+			Util::msgNote(Util::BuildString("New image loaded: %s", Path.c_str()));
+			for (int x = 0; x < Img->getSize().x; x++)
+			{
+				CD[x] = new bool[Img->getSize().y];
+			}
 		}
+		else
+		{
+			Util::msgErr(Util::BuildString("Error loading image: %s", Path.c_str()));
+			return nullptr;
+		}
+
+		for(int x = 0; x < Img->getSize().x; x++)
+		{
+			for(int y = 0; y < Img->getSize().y; y++)
+			{
+				if (Img->getPixel(x, y).a < 50)
+				{
+					tempsize[x][y] = false;
+				} else {
+					tempsize[x][y] = true;
+				}
+			}
+		}
+		Tex->loadFromImage(*Img);
+		TexObj->CData = tempsize;
 	}
 	else
 	{
-		Util::msgErr(Util::BuildString("Error loading image: %s", Path.c_str()));
-		return nullptr;
+		Tex->loadFromFile(Path);
+		TexObj->CData = nullptr;
 	}
 
-	for(int x = 0; x < Img->getSize().x; x++)
-	{
-		for(int y = 0; y < Img->getSize().y; y++)
-		{
-			if (Img->getPixel(x, y).a < 50)
-			{
-				tempsize[x][y] = false;
-			} else {
-				tempsize[x][y] = true;
-			}
-		}
-		
-	}
-
-	sf::Texture* Tex = new sf::Texture();
-	Tex->loadFromImage(*Img);
 	TexObj->Texture = Tex;
 	TexObj->bPersistent = bPersistent;
 	TexObj->Path = Path;
-	TexObj->CData = tempsize;
 	Textures.push_back(TexObj);
 	delete Img;
 	return Tex;

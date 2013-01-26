@@ -4,6 +4,7 @@
 #include <stdarg.h>
 #include <string>
 #include <iostream>
+#include <SFML/Graphics.hpp>
 
 enum CON_COLOR
 {
@@ -73,4 +74,35 @@ namespace Util
 		Util::PrintColor(Util::BuildString("[ ERR:] %s\n", Text.c_str()), RED);
 	}
 
+	inline sf::Vector2f CenterText(sf::Text* Text, sf::RenderWindow* Window)
+	{
+		sf::Vector2f Vec(0, 0);
+
+		size_t CharacterSize = Text->getCharacterSize();
+		sf::Font Font = Text->getFont();
+		std::string String = Text->getString().toAnsiString();
+		bool bold = (Text->getStyle() & sf::Text::Bold);
+		size_t MaxHeight = 0;
+
+		for (size_t x=0; x< Text->getString().getSize(); ++x)
+		{
+			sf::Uint32 Character = String.at(x);
+
+			const sf::Glyph& CurrentGlyph = Font.getGlyph(Character, CharacterSize, bold);
+
+			size_t Height = CurrentGlyph.bounds.height;
+
+			if (MaxHeight < Height)
+				MaxHeight = Height;
+		}
+
+		sf::FloatRect rect = Text->getGlobalBounds();
+
+		rect.left = (Window->getSize().x / 2.0f) - (rect.width / 2.0f);
+		rect.top = (Window->getSize().y / 2.0f) - (MaxHeight/2.0f) - (rect.height-MaxHeight) + ((rect.height-CharacterSize)/2.0f);
+
+		Vec.x = rect.left;
+		Vec.y = rect.top;
+		return Vec;
+	}
 }

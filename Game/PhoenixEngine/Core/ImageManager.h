@@ -18,7 +18,7 @@ struct TextureObject
 class ImageManager
 {
 	public:
-		static sf::Texture* RequestTexture(std::string Path, bool bPersistent = false);
+		static sf::Texture* RequestTexture(std::string Path, bool bLoadAsTexture = false, bool bPersistent = false);
 		static bool** RequestCollisionData(const sf::Texture* Tex);
 		static void ClearCache();
 		static void ClearPersistent();

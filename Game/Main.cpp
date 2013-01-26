@@ -1,7 +1,7 @@
 #include "PhoenixEngine/Core/PhoenixEngine.h"
 
-#include "StateTest.h"
-#include "LevelOne.h"
+#include "StateLoading.h"
+#include "StateMenu.h"
 
 #include "WiimoteBindings.h"
 int main(int argc, char* argv[])
@@ -10,11 +10,10 @@ int main(int argc, char* argv[])
 	E->DESIRED_FPS = 60;
 	E->WINDOW_TITLE = "Comatic Trauma!111!!111!1!!1oneone";
 	E->RESOLUTION = sf::Vector2u(1280, 720);
-	//E->SetLoadingState(new SOMETHING);
+	E->SetLoadingState(new StateLoading);
 	E->Init();
 	
-	E->QueueState(new StateTest);
-	//WiimoteBindings::connectWiimote();
+	E->QueueState(new StateMenu);
 	while(E->Running())
 	{
 		E->Update();

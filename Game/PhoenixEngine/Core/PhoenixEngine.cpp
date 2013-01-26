@@ -2,6 +2,7 @@
 #include "Utility.h"
 #include <iostream>
 #include <ctime>
+#include <typeinfo>
 
 static const float VERSION = 1.0f;
 static const float SUB_VERSION = 0.0f;
@@ -102,6 +103,8 @@ void PhoenixEngine::ChangeState()
 		TemporaryState->Init();
 		ToggleLoading(false);
 		m_CurrentState = TemporaryState;
+
+		Util::msgNote(Util::BuildString("State Loaded: %s", typeid(*m_CurrentState).name()));
 
 		m_QueuedState = nullptr;
 	}
