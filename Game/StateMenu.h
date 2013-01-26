@@ -16,9 +16,13 @@ class StateMenu : public GameState
 
 	private:
 		AnimManager* Anims;
-		//sf::Sprite* BgAnim;
-		//sf::Sprite* StaticOverlay;
-		//int BgAnimIndex;
+		sf::Sprite* Background;
+		sf::Sprite* Highlight;
+		bool Selected;
+		bool WPressed;
+		bool SPressed;
+		bool UpPressed;
+		bool DownPressed;
 		enum Menus
 		{
 			HOME,

@@ -10,7 +10,8 @@ int main(int argc, char* argv[])
 	E->DESIRED_FPS = 60;
 	E->WINDOW_TITLE = "Comatic Trauma!111!!111!1!!1oneone";
 	E->RESOLUTION = sf::Vector2u(1280, 720);
-	E->SetLoadingState(new StateLoading);
+	//E->VID_FLAGS = sf::Style::Fullscreen;
+	//E->SetLoadingState(new StateLoading);
 	E->Init();
 	
 	E->QueueState(new StateMenu);
