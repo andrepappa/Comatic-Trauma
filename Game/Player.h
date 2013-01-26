@@ -32,5 +32,9 @@ private:
 	sf::Time m_DeltaTime;
 	sf::View* Camera;
 	sf::FloatRect CameraBounds;
+
+	bool m_ICollide;
+	bool m_OnPlatform;
+
 };
 

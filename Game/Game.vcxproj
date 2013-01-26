@@ -83,6 +83,7 @@
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="LevelOne.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="PhoenixEngine\Core\ImageManager.cpp" />
     <ClCompile Include="PhoenixEngine\Core\PhoenixEngine.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -95,6 +96,7 @@
     <ClInclude Include="Collision.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="LevelOne.h" />
+    <ClInclude Include="Obstacle.h" />
     <ClInclude Include="PhoenixEngine\Core\GameState.h" />
     <ClInclude Include="PhoenixEngine\Core\ImageManager.h" />
     <ClInclude Include="PhoenixEngine\Core\Object.h" />

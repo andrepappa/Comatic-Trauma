@@ -19,7 +19,7 @@ class ImageManager
 {
 	public:
 		static sf::Texture* RequestTexture(std::string Path, bool bPersistent = false);
-		static bool** RequestCollisionData(std::string Path);
+		static bool** RequestCollisionData(const sf::Texture* Tex);
 		static void ClearCache();
 		static void ClearPersistent();
 

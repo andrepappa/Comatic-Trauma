@@ -4,6 +4,7 @@
 #include "Background.h"
 #include "PhoenixEngine\Core\PhoenixEngine.h"
 #include "PhoenixEngine\Core\ImageManager.h"
+#include "Obstacle.h"
 
 LevelOne::~LevelOne() 
 {
@@ -23,7 +24,22 @@ void LevelOne::Init()
 	Player* PL = new Player;
 	PL->SetCamera(Camera);
 	m_LOObjects.push_back(BG);
+
+	Obstacle* BoxCollTest = new Obstacle();
+	sf::Sprite* CrashTestDummy = new sf::Sprite(*ImageManager::RequestTexture("Assets/GraphicalAssets/ornate_small1.png"));
+	BoxCollTest->setSprite(CrashTestDummy);
+	BoxCollTest->CollisionRef = CrashTestDummy;
+	CrashTestDummy->setPosition(400.0f, 400.0f);
+	m_LOObjects.push_back(BoxCollTest);
 	m_LOObjects.push_back(PL);
+
+	Obstacle* BoxCollTest2 = new Obstacle();
+	sf::Sprite* CrashDummy2 = new sf::Sprite(*ImageManager::RequestTexture("Assets/GraphicalAssets/ornate_small1.png"));
+	BoxCollTest2->setSprite(CrashDummy2);
+	BoxCollTest2->CollisionRef = CrashDummy2;
+	CrashDummy2->setPosition(900.0f, 500.0f);
+	m_LOObjects.push_back(BoxCollTest2);
+
 }
 
 void LevelOne::Update(sf::Time DeltaTime)
@@ -41,7 +57,13 @@ void LevelOne::Update(sf::Time DeltaTime)
 	{
 		for (unsigned int j = (i+1); j < m_LOObjects.size(); j++)
 		{
-			m_LOObjects[i]->CheckCollision(m_LOObjects[j]);
+			if (m_LOObjects[i]->CheckCollision(m_LOObjects[j]))
+			{
+				std::cout << "We are colliding" << std::endl;
+				
+
+			}
+			
 		}
 	}
 

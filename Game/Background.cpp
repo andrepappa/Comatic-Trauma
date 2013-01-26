@@ -8,7 +8,7 @@ Background::Background()
 	ParallaxImage* PI = new ParallaxImage();
 	PI->Sprites[0] = new sf::Sprite(*ImageManager::RequestTexture("Assets/GraphicalAssets/ornate1.png"));
 	PI->Sprites[1] = new sf::Sprite(*ImageManager::RequestTexture("Assets/GraphicalAssets/ornate1.png"));
-
+	PI->Sprites[1]->setPosition(1280.0f, 0.0f);
 	m_Backgrounds.push_back(PI);
 }
 

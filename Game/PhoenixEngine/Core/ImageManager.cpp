@@ -6,11 +6,11 @@
 
 std::vector<TextureObject*> ImageManager::Textures;
 
-bool** ImageManager::RequestCollisionData(std::string Path)
+bool** ImageManager::RequestCollisionData(const sf::Texture* Tex)
 {
 	for(unsigned int i = 0; i < Textures.size(); i++)
 	{
-		if(Textures[i]->Path == Path)
+		if(Textures[i]->Texture == Tex)
 		{
 			return Textures[i]->CData;
 		}

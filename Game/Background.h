@@ -16,6 +16,7 @@ public:
 	virtual void Draw(sf::RenderWindow* Window) override;
 	
 	void SetCamera(sf::View* Cam){ Camera = Cam; }
+	// void SetPlayerPos(float x, float y); // Set the position so we know where the player is and can change the background based on that?
 
 private:
 	sf::View* Camera;

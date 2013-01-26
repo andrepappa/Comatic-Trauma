@@ -2,8 +2,8 @@
 #include "PhoenixEngine\Core\ImageManager.h"
 #include "PhoenixEngine\Core\PhoenixEngine.h"
 #include "PhoenixEngine\Core\Utility.h"
-
-#include "Background.h"
+#include <iostream>
+#include "Obstacle.h"
 
 Player::Player()
 {
@@ -22,6 +22,8 @@ Player::Player()
 	JumpReduce = 55.0f;
 	Jumping = false;
 	Falling = false;
+	m_ICollide = false;
+	m_OnPlatform = false;
 }
 
 
@@ -32,12 +34,31 @@ Player::~Player()
 
 void Player::CollidedWith(Collision* Other)
 {
-	Background* BG = dynamic_cast<Background*>(Other);
+	Obstacle* BG = dynamic_cast<Obstacle*>(Other);
 
 	if(BG != NULL)
 	{
-		Util::msgNote("Collided With World!");
-	}
+		Util::msgNote("Collided With Obstacle!");
+		m_ICollide = true;
+	}/* else {
+		m_ICollide = false;
+	}*/
+
+	std::cout << "GOsprite: " << m_GOSprite->getPosition().x << "\t" << m_GOSprite->getPosition().y << std::endl;
+	std::cout << "Other: " << Other->CollisionRef->getPosition().x << "\t" << Other->CollisionRef->getPosition().y << std::endl;
+
+	//if ( (m_GOSprite->getPosition().y < Other->CollisionRef->getPosition().y + Other->CollisionRef->getTextureRect().height) || 
+	//	m_GOSprite->getPosition().y + m_GOSprite->getTextureRect().height > Other->CollisionRef->getPosition().y)
+	//{
+	//	std::cout << "gosprite pos y < right" << std::endl;
+	//	if (m_GOSprite->getPosition().x + m_GOSprite->getTextureRect().width > Other->CollisionRef->getPosition().x &&
+	//		m_GOSprite->getPosition().x < Other->CollisionRef->getPosition().x + Other->CollisionRef->getTextureRect().width)
+	//	{
+	//		m_OnPlatform = true;
+	//		std::cout << "onplatt: true" << std::endl;
+	//	}
+
+	//}
 }
 
 void Player::Draw(sf::RenderWindow* window)
@@ -47,7 +68,7 @@ void Player::Draw(sf::RenderWindow* window)
 	Rect.setFillColor(sf::Color(0, 255, 0));
 	
 	window->setView(window->getDefaultView());
-	window->draw(Rect);
+//	window->draw(Rect);
 	window->setView(*Camera);
 	window->draw(*m_GOSprite);
 }
@@ -70,10 +91,10 @@ void Player::Update(sf::Time DeltaTime)
 	}
 	else
 	{
-		if (!Falling && !(JumpSpeed <= 500))
+		if (!Falling && !(JumpSpeed <= 500) && m_OnPlatform )
 		{
 			Falling = true;
-			JumpSpeed = 500;
+			JumpSpeed = JumpDefault;
 		}
 	}
 
@@ -88,14 +109,16 @@ void Player::Update(sf::Time DeltaTime)
 		DirectionY = 0.0f;
 	}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+	if ( (sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left))/* && m_ICollide == false*/)
 	{
 
 		DirectionX = -1.0f;
+		m_ICollide = false;
 	} 
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) || sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+	else if ( (sf::Keyboard::isKeyPressed(sf::Keyboard::D) || sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) && m_ICollide == false)
 	{
 		DirectionX = 1.0f;
+
 	}
 	
 	PosY = JumpSpeed * DirectionY * PhoenixEngine::DeltaTime.asSeconds();
@@ -107,7 +130,7 @@ void Player::Update(sf::Time DeltaTime)
 		Jumping = false;
 		JumpSpeed = JumpDefault;
 		Falling = false;
-		m_GOSprite->setPosition(m_GOSprite->getPosition().x,500.0f);
+//		m_GOSprite->setPosition(m_GOSprite->getPosition().x, 500.0f);
 	}
 
 	/* Convert CameraBounds to global coords */
@@ -123,4 +146,6 @@ void Player::Update(sf::Time DeltaTime)
 		Camera->move(0.0f, m_GOSprite->getPosition().y - CameraBoundsGlobalCoords.y);
 	if(m_GOSprite->getPosition().y + m_GOSprite->getTextureRect().height > CameraBoundsGlobalCoords.y + CameraBounds.height)
 		Camera->move(0.0f, (m_GOSprite->getPosition().y + m_GOSprite->getTextureRect().height) - (CameraBoundsGlobalCoords.y + CameraBounds.height));
+
+
 }
