@@ -8,8 +8,8 @@ int main(int argc, char* argv[])
 {
 	PhoenixEngine* E = PhoenixEngine::GetInstance();
 	E->DESIRED_FPS = 60;
-	E->WINDOW_TITLE = "Phoenix Engine Test";
-	E->RESOLUTION = sf::Vector2u(800, 800);
+	E->WINDOW_TITLE = "Comatic Trauma!111!!111!1!!1oneone";
+	E->RESOLUTION = sf::Vector2u(1280, 720);
 	//E->SetLoadingState(new SOMETHING);
 	E->Init();
 	

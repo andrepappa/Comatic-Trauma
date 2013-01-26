@@ -80,21 +80,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Background.cpp" />
     <ClCompile Include="LevelOne.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="PhoenixEngine\Core\ImageManager.cpp" />
     <ClCompile Include="PhoenixEngine\Core\PhoenixEngine.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="StateTest.cpp" />
     <ClCompile Include="WiimoteBindings.cpp" />
     <ClCompile Include="wiiyourself\wiimote.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Background.h" />
+    <ClInclude Include="Collision.h" />
+    <ClInclude Include="GameObject.h" />
     <ClInclude Include="LevelOne.h" />
     <ClInclude Include="PhoenixEngine\Core\GameState.h" />
     <ClInclude Include="PhoenixEngine\Core\ImageManager.h" />
     <ClInclude Include="PhoenixEngine\Core\Object.h" />
     <ClInclude Include="PhoenixEngine\Core\PhoenixEngine.h" />
     <ClInclude Include="PhoenixEngine\Core\Utility.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="StateTest.h" />
     <ClInclude Include="WiimoteBindings.h" />
     <ClInclude Include="wiiyourself\wiimote.h" />

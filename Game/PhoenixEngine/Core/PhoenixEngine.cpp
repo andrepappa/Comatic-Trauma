@@ -9,6 +9,7 @@ static const float SUB_VERSION = 0.0f;
 PhoenixEngine PhoenixEngine::m_Instance;
 GameState* PhoenixEngine::m_QueuedState;
 bool PhoenixEngine::bLoading;
+sf::Time PhoenixEngine::DeltaTime;
 
 PhoenixEngine::PhoenixEngine() : m_AsyncThread(&AsyncDraw)
 {

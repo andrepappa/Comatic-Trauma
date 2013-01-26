@@ -14,7 +14,7 @@ class PhoenixEngine
 		sf::Vector2u RESOLUTION;
 		std::string WINDOW_TITLE;
 		bool bVSYNC;
-		sf::Time DeltaTime;
+		static sf::Time DeltaTime;
 
 
 		void Init();

@@ -6,6 +6,18 @@
 
 std::vector<TextureObject*> ImageManager::Textures;
 
+bool** ImageManager::RequestCollisionData(std::string Path)
+{
+	for(unsigned int i = 0; i < Textures.size(); i++)
+	{
+		if(Textures[i]->Path == Path)
+		{
+			return Textures[i]->CData;
+		}
+	}
+	return nullptr;
+}
+
 sf::Texture* ImageManager::RequestTexture(std::string Path, bool bPersistent)
 {
 	for(unsigned int i = 0; i < Textures.size(); i++)
@@ -15,17 +27,49 @@ sf::Texture* ImageManager::RequestTexture(std::string Path, bool bPersistent)
 			return Textures[i]->Texture;
 		}
 	}
+	
 
 	TextureObject* TexObj = new TextureObject();
-	sf::Texture* Tex = new sf::Texture();
-	if(Tex->loadFromFile(Path))
+	sf::Image* Img = new sf::Image();
+	bool** tempsize;
+	if(Img->loadFromFile(Path))
+	{
+		bool** CD = new bool *[Img->getSize().x];
+		tempsize = CD;	
 		Util::msgNote(Util::BuildString("New image loaded: %s", Path.c_str()));
+		for (int x = 0; x < Img->getSize().x; x++)
+		{
+			CD[x] = new bool[Img->getSize().y];
+		}
+	}
 	else
+	{
 		Util::msgErr(Util::BuildString("Error loading image: %s", Path.c_str()));
+		return nullptr;
+	}
+
+	for(int x = 0; x < Img->getSize().x; x++)
+	{
+		for(int y = 0; y < Img->getSize().y; y++)
+		{
+			if (Img->getPixel(x, y).a < 50)
+			{
+				tempsize[x][y] = false;
+			} else {
+				tempsize[x][y] = true;
+			}
+		}
+		
+	}
+
+	sf::Texture* Tex = new sf::Texture();
+	Tex->loadFromImage(*Img);
 	TexObj->Texture = Tex;
 	TexObj->bPersistent = bPersistent;
 	TexObj->Path = Path;
+	TexObj->CData = tempsize;
 	Textures.push_back(TexObj);
+	delete Img;
 	return Tex;
 }
 

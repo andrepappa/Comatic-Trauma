@@ -5,19 +5,21 @@
 #include <SFML/Graphics.hpp>
 #include <string>
 
-
 struct TextureObject
 {
 	public:
 		sf::Texture* Texture;
 		bool bPersistent;
 		std::string Path;
+		bool** CData;
+		
 };
 
 class ImageManager
 {
 	public:
 		static sf::Texture* RequestTexture(std::string Path, bool bPersistent = false);
+		static bool** RequestCollisionData(std::string Path);
 		static void ClearCache();
 		static void ClearPersistent();
 
