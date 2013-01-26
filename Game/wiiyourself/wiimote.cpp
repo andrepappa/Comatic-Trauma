@@ -409,7 +409,8 @@ bool wiimote::Connect (unsigned wiimote_index, bool force_hidwrites)
 			//  all devices, but may work fairly well in practice... ?)
 			memcpy(&UniqueID, &CalibrationInfo, sizeof(CalibrationInfo));
 
-			_ASSERT(UniqueID != 0); // if this fires, the calibration data didn't
+			;//Le break
+			//_ASSERT(UniqueID != 0); // if this fires, the calibration data didn't
 									//  arrive - this shouldn't happen
 
 #ifdef ID2_FROM_DEVICEPATH		// (see comments in header)

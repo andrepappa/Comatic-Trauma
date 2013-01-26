@@ -7,6 +7,10 @@
 sf::Font StateTest_Font;
 sf::Text StateTest_Text1, StateTest_Text2;
 
+#include "WiimoteBindings.h"
+
+#include "PhoenixEngine/Core/Utility.h"
+
 void StateTest::Init()
 {
 	StateTest_Font.loadFromFile("C:\\Windows\\Fonts\\arial.ttf");
@@ -30,7 +34,37 @@ StateTest::~StateTest()
 
 void StateTest::Update(sf::Time DeltaTime)
 {
+	if(WiimoteBindings::isPressed(WiimoteKeys::ONE))
+		Util::msgNote("ONE PRESSED!");
+	if(WiimoteBindings::isDown(WiimoteKeys::ONE))
+		Util::msgNote("ONE DOWN!");
+	if(WiimoteBindings::isReleased(WiimoteKeys::ONE))
+		Util::msgNote("ONE RELEASED!");
 
+	static bool T1 = false, T2 = false, T3 = false, T4 = false;
+	if(WiimoteBindings::isPressed(WiimoteKeys::UP))
+	{
+		T1 = !T1;
+		WiimoteBindings::setLEDs(T1, T2, T3, T4);
+	}
+	if(WiimoteBindings::isPressed(WiimoteKeys::RIGHT))
+	{
+		T2 = !T2;
+		WiimoteBindings::setLEDs(T1, T2, T3, T4);
+	}
+	if(WiimoteBindings::isPressed(WiimoteKeys::DOWN))
+	{
+		T3 = !T3;
+		WiimoteBindings::setLEDs(T1, T2, T3, T4);
+	}
+	if(WiimoteBindings::isPressed(WiimoteKeys::LEFT))
+	{
+		T4 = !T4;
+		WiimoteBindings::setLEDs(T1, T2, T3, T4);
+	}
+
+	if(WiimoteBindings::isPressed(WiimoteKeys::B))
+		WiimoteBindings::setRumble(100);
 }
 
 void StateTest::HandleEvents(sf::Event EventHandle)
