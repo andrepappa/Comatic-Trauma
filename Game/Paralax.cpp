@@ -5,6 +5,13 @@
 
 Paralax::~Paralax()
 {
+	delete m_FarBg;
+	delete m_MediumBg;
+	delete m_Foreground;
+
+	delete LevelCamera;
+	//delete MidCamera;
+	//delete FarCamera;
 }
 
 
@@ -15,8 +22,8 @@ void Paralax::Init()
 	m_Foreground = new sf::Sprite(*ImageManager::RequestTexture("Assets/GraphicalAssets/Paralax/level_prototype_cloud.png"));
 
 	LevelCamera = new sf::View(sf::FloatRect(0, 0, 1280, 720));
-	MidCamera = new sf::View(sf::FloatRect(0,0,1280,720));
-	FarCamera = new sf::View(sf::FloatRect(0,0,1280,720));
+//	MidCamera = new sf::View(sf::FloatRect(0,0,1280,720));
+//	FarCamera = new sf::View(sf::FloatRect(0,0,1280,720));
 
 	m_Speed = 50.0f;
 	m_DirX = 0.0f;

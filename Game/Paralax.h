@@ -1,5 +1,6 @@
 #pragma once
-#include "e:\github\comatic-trauma\game\phoenixengine\core\gamestate.h"
+#include "phoenixengine\core\gamestate.h"
+
 class Paralax :
 	public GameState
 {
@@ -18,8 +19,8 @@ private:
 	sf::Sprite* m_Foreground;
 
 	sf::View* LevelCamera;
-	sf::View* FarCamera;
-	sf::View* MidCamera;
+//	sf::View* FarCamera;
+//	sf::View* MidCamera;
 
 	float m_Speed;
 	float m_DirX;
