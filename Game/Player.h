@@ -3,38 +3,38 @@
 #include <iostream>
 
 #include <SFML\Graphics.hpp>
+#include "AnimManager.h"
+
 class Player :
 	public GameObject
 {
-public:
-	Player();
-	~Player();
+	public:
+		Player();
+		~Player();
 
-	virtual void Update(sf::Time DeltaTime) override;
-	virtual void HandleEvents(sf::Event EventHandle) override;
-	virtual void Draw(sf::RenderWindow* Window) override;
+		virtual void Update(sf::Time DeltaTime) override;
+		virtual void HandleEvents(sf::Event EventHandle) override;
+		virtual void Draw(sf::RenderWindow* Window) override;
 
-	void CollidedWith(Collision* Other);
+		void CollidedWith(Collision* Other, bool** IntersectData);
 
-	void SetCamera(sf::View* Cam){ Camera = Cam; }
+		void SetCamera(sf::View* Cam){ Camera = Cam; }
 
-private:
-	float PosX;
-	float PosY;
-	float Speed;
-	float DirectionX;
-	float DirectionY;
-	float JumpDefault;
-	float JumpReduce;
-	float JumpSpeed;
-	bool Jumping;
-	bool Falling;
-	sf::Time m_DeltaTime;
-	sf::View* Camera;
-	sf::FloatRect CameraBounds;
+	private:
+		AnimManager* AnimMgr;
+		int Anim_Idle, Anim_Run, Anim_Jump, Anim_Fall;
+		float Speed;
+		float Grav;
+		float Gravity;
+		float MaxJump;
+		bool bTouchingGround;
 
-	bool m_ICollide;
-	bool m_OnPlatform;
+		sf::Time m_DeltaTime;
+		sf::View* Camera;
+		sf::FloatRect CameraBounds;
+
+		bool m_ICollide;
+		bool m_OnPlatform;
 
 };
 

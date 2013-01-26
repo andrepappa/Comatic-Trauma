@@ -87,11 +87,15 @@
     <ClCompile Include="PhoenixEngine\Core\ImageManager.cpp" />
     <ClCompile Include="PhoenixEngine\Core\PhoenixEngine.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="SoundController.cpp" />
+    <ClCompile Include="StateLoading.cpp" />
+    <ClCompile Include="StateMenu.cpp" />
     <ClCompile Include="StateTest.cpp" />
     <ClCompile Include="WiimoteBindings.cpp" />
     <ClCompile Include="wiiyourself\wiimote.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AnimManager.h" />
     <ClInclude Include="Background.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="GameObject.h" />
@@ -103,6 +107,9 @@
     <ClInclude Include="PhoenixEngine\Core\PhoenixEngine.h" />
     <ClInclude Include="PhoenixEngine\Core\Utility.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="SoundController.h" />
+    <ClInclude Include="StateLoading.h" />
+    <ClInclude Include="StateMenu.h" />
     <ClInclude Include="StateTest.h" />
     <ClInclude Include="WiimoteBindings.h" />
     <ClInclude Include="wiiyourself\wiimote.h" />

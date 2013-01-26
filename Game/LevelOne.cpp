@@ -53,7 +53,7 @@ void LevelOne::Init()
 	BoxCollTest->setSprite(CrashTestDummy);
 	BoxCollTest->CollisionRef = CrashTestDummy;
 	CrashTestDummy->setPosition(400.0f, 400.0f);
-	m_LOObjects.push_back(BoxCollTest);
+	//m_LOObjects.push_back(BoxCollTest);
 	m_LOObjects.push_back(PL);
 
 	Obstacle* BoxCollTest2 = new Obstacle();
@@ -61,7 +61,7 @@ void LevelOne::Init()
 	BoxCollTest2->setSprite(CrashDummy2);
 	BoxCollTest2->CollisionRef = CrashDummy2;
 	CrashDummy2->setPosition(900.0f, 500.0f);
-	m_LOObjects.push_back(BoxCollTest2);
+	//m_LOObjects.push_back(BoxCollTest2);
 
 }
 
@@ -82,7 +82,7 @@ void LevelOne::Update(sf::Time DeltaTime)
 		{
 			if (m_LOObjects[i]->CheckCollision(m_LOObjects[j]))
 			{
-				std::cout << "We are colliding" << std::endl;
+				//std::cout << "We are colliding" << std::endl;
 				
 				 
 			}

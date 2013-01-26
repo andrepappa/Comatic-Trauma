@@ -3,27 +3,29 @@
 #include "PhoenixEngine\Core\PhoenixEngine.h"
 #include "PhoenixEngine\Core\Utility.h"
 #include <iostream>
-#include "Obstacle.h"
+#include "Background.h"
 
+#include <vector>
 Player::Player()
 {
 	CameraBounds = sf::FloatRect(240, 150, 400, 420);
 	Camera = nullptr;
-	m_GOSprite = new sf::Sprite(*ImageManager::RequestTexture("Assets/GraphicalAssets/ship.png"));
+	AnimMgr = new AnimManager();
+
+	std::vector<sf::IntRect*> Frames_Idle = AnimManager::GetSubRects(199, 328, 1, 8, 0, 0);
+	std::vector<sf::IntRect*> Frames_Run = AnimManager::GetSubRects(199, 328, 8, 8, 0, 0);
+	std::vector<sf::IntRect*> Frames_Jump = AnimManager::GetSubRects(199, 328, 1, 8, 1, 1);
+
+
+	m_GOSprite = new sf::Sprite(*ImageManager::RequestTexture("Assets/GraphicalAssets/player.png"));
 	CollisionRef = m_GOSprite;
-	Speed = 500.0f;
 	m_GOSprite->setPosition(250.0f, 400.0f);
-	PosX = 0.0f;
-	PosY = 0.0f;
-	DirectionX = 0.0f;
-	DirectionY = 0.0f;
-	JumpDefault = 1400.0f;
-	JumpSpeed = 1400.0f;
-	JumpReduce = 55.0f;
-	Jumping = false;
-	Falling = false;
-	m_ICollide = false;
-	m_OnPlatform = false;
+
+	Speed = 400;
+	Grav = 0;
+	Gravity = 40;
+	MaxJump = -1000;
+	bTouchingGround = false;
 }
 
 
@@ -32,45 +34,111 @@ Player::~Player()
 	delete m_GOSprite;
 }
 
-void Player::CollidedWith(Collision* Other)
+sf::IntRect INTRECT, INTRECT2;
+void Player::CollidedWith(Collision* Other, bool** IntersectData)
 {
-	Obstacle* BG = dynamic_cast<Obstacle*>(Other);
+	Background* BG = dynamic_cast<Background*>(Other);
 
 	if(BG != NULL)
 	{
-		Util::msgNote("Collided With Obstacle!");
-		m_ICollide = true;
-	}/* else {
-		m_ICollide = false;
-	}*/
+		sf::Rect<int> IntersectingRect;
+		sf::IntRect SpriteRect(0,0,0,0), SpriteRectOther(0,0,0,0);
+		SpriteRect.left = CollisionRef->getPosition().x;
+		SpriteRect.top = CollisionRef->getPosition().y;
+		SpriteRect.width = CollisionRef->getTextureRect().width;
+		SpriteRect.height = CollisionRef->getTextureRect().height;
+		SpriteRectOther.left = Other->CollisionRef->getPosition().x;
+		SpriteRectOther.top = Other->CollisionRef->getPosition().y;
+		SpriteRectOther.width = Other->CollisionRef->getTextureRect().width;
+		SpriteRectOther.height = Other->CollisionRef->getTextureRect().height;
 
-	std::cout << "GOsprite: " << m_GOSprite->getPosition().x << "\t" << m_GOSprite->getPosition().y << std::endl;
-	std::cout << "Other: " << Other->CollisionRef->getPosition().x << "\t" << Other->CollisionRef->getPosition().y << std::endl;
+		SpriteRect.intersects(SpriteRectOther, IntersectingRect);
 
-	//if ( (m_GOSprite->getPosition().y < Other->CollisionRef->getPosition().y + Other->CollisionRef->getTextureRect().height) || 
-	//	m_GOSprite->getPosition().y + m_GOSprite->getTextureRect().height > Other->CollisionRef->getPosition().y)
-	//{
-	//	std::cout << "gosprite pos y < right" << std::endl;
-	//	if (m_GOSprite->getPosition().x + m_GOSprite->getTextureRect().width > Other->CollisionRef->getPosition().x &&
-	//		m_GOSprite->getPosition().x < Other->CollisionRef->getPosition().x + Other->CollisionRef->getTextureRect().width)
-	//	{
-	//		m_OnPlatform = true;
-	//		std::cout << "onplatt: true" << std::endl;
-	//	}
+		int FirstX = -1, FirstY = -1;
+		int LastX = -1, LastY = -1;
 
-	//}
+		for(int x = 0; x < IntersectingRect.width; x++)
+		{
+			for(int y = 0; y < IntersectingRect.height; y++)
+			{
+				if(IntersectData[x][y])
+				{
+					if(FirstX == -1 || FirstX > x)
+						FirstX = x;
+					if(FirstY == -1 || FirstY > y)
+						FirstY = y;
+
+					if(LastX == -1 || LastX < x)
+						LastX = x;
+					if(LastY == -1 || LastY < y)
+						LastY = y;
+				}
+			}
+		}
+
+		sf::IntRect NewIntersectRect(IntersectingRect.left + FirstX, IntersectingRect.top + FirstY, LastX - FirstX, LastY - FirstY);
+
+		bool bLeft = false, bRight = false, bCeiling = false, bFloor = false;
+
+		//Floor
+		if(NewIntersectRect.top > IntersectingRect.top + IntersectingRect.height/2)
+			bFloor = true;
+
+		//Ceiling
+		if(NewIntersectRect.top < IntersectingRect.top + IntersectingRect.height/2)
+			bCeiling = true;
+
+		//Left
+		if(NewIntersectRect.left > IntersectingRect.left + IntersectingRect.width/2)
+			bLeft = true;
+
+		//Right
+		if(NewIntersectRect.left < IntersectingRect.left + IntersectingRect.width/2)
+			bLeft = true;
+
+		if(bFloor)
+			bTouchingGround = true;
+
+		while(CheckCollision(Other, false))
+		{
+			if(bFloor || bCeiling)
+			{
+				if(bFloor)
+					m_GOSprite->move(0, -Gravity*PhoenixEngine::DeltaTime.asSeconds());
+				if(bCeiling)
+					m_GOSprite->move(0, Gravity*PhoenixEngine::DeltaTime.asSeconds());
+			}
+			else
+			{
+				if(bLeft)
+					m_GOSprite->move(-Speed*PhoenixEngine::DeltaTime.asSeconds(), 0);
+				if(bRight)
+					m_GOSprite->move(Speed*PhoenixEngine::DeltaTime.asSeconds(), 0);
+			}
+			Grav = 0;
+		}
+
+		INTRECT = IntersectingRect;
+		INTRECT2 = NewIntersectRect;
+	}
 }
 
 void Player::Draw(sf::RenderWindow* window)
 {
-	sf::RectangleShape Rect(sf::Vector2f(CameraBounds.width, CameraBounds.height));
-	Rect.setPosition(CameraBounds.left, CameraBounds.top);
-	Rect.setFillColor(sf::Color(0, 255, 0));
-	
-	window->setView(window->getDefaultView());
-//	window->draw(Rect);
-	window->setView(*Camera);
+	sf::RectangleShape Rect1(sf::Vector2f(INTRECT.width, INTRECT.height));
+	Rect1.setPosition(INTRECT.left, INTRECT.top);
+	Rect1.setFillColor(sf::Color::Transparent);
+	Rect1.setOutlineColor(sf::Color::Red);
+	Rect1.setOutlineThickness(1);
+	sf::RectangleShape Rect2(sf::Vector2f(INTRECT2.width, INTRECT2.height));
+	Rect2.setPosition(INTRECT2.left, INTRECT2.top);
+	Rect2.setFillColor(sf::Color::Transparent);
+	Rect2.setOutlineColor(sf::Color::Green);
+	Rect2.setOutlineThickness(1);
+
 	window->draw(*m_GOSprite);
+	window->draw(Rect1);
+	window->draw(Rect2);
 }
 
 void Player::HandleEvents(sf::Event EventHandle) 
@@ -80,57 +148,25 @@ void Player::HandleEvents(sf::Event EventHandle)
 
 void Player::Update(sf::Time DeltaTime) 
 {
-	DirectionX = 0.0f;
-	DirectionY = 0.0f;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) || sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::Space ))
-	{
-		DirectionY = -1.0f;
 
-		Jumping = true;
+	m_GOSprite->move(0, Grav*DeltaTime.asSeconds());
+	Grav += Gravity;
 
-	}
-	else
+	if(m_GOSprite->getPosition().y > 750)
 	{
-		if (!Falling && !(JumpSpeed <= 500) && m_OnPlatform )
-		{
-			Falling = true;
-			JumpSpeed = JumpDefault;
-		}
+		Grav = 0;
+		bTouchingGround = true;
 	}
 
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+		m_GOSprite->move(-Speed*DeltaTime.asSeconds(), 0);
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+		m_GOSprite->move(Speed*DeltaTime.asSeconds(), 0);
 
-	if (Jumping)
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && bTouchingGround)
 	{
-		DirectionY = -1.0f;
-		JumpSpeed -= JumpReduce;
-	}
-	else
-	{
-		DirectionY = 0.0f;
-	}
-
-	if ( (sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left))/* && m_ICollide == false*/)
-	{
-
-		DirectionX = -1.0f;
-		m_ICollide = false;
-	} 
-	else if ( (sf::Keyboard::isKeyPressed(sf::Keyboard::D) || sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) && m_ICollide == false)
-	{
-		DirectionX = 1.0f;
-
-	}
-	
-	PosY = JumpSpeed * DirectionY * PhoenixEngine::DeltaTime.asSeconds();
-	PosX = Speed * DirectionX * PhoenixEngine::DeltaTime.asSeconds();
-	m_GOSprite->move(PosX, PosY);
-	//Camera->move(PosX, PosY);
-	if (m_GOSprite->getPosition().y > 500)
-	{
-		Jumping = false;
-		JumpSpeed = JumpDefault;
-		Falling = false;
-//		m_GOSprite->setPosition(m_GOSprite->getPosition().x, 500.0f);
+		Grav = MaxJump;
+		bTouchingGround = false;
 	}
 
 	/* Convert CameraBounds to global coords */
@@ -146,6 +182,4 @@ void Player::Update(sf::Time DeltaTime)
 		Camera->move(0.0f, m_GOSprite->getPosition().y - CameraBoundsGlobalCoords.y);
 	if(m_GOSprite->getPosition().y + m_GOSprite->getTextureRect().height > CameraBoundsGlobalCoords.y + CameraBounds.height)
 		Camera->move(0.0f, (m_GOSprite->getPosition().y + m_GOSprite->getTextureRect().height) - (CameraBoundsGlobalCoords.y + CameraBounds.height));
-
-
 }

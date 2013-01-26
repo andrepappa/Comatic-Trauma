@@ -17,7 +17,7 @@ class Collision
 
 		sf::Sprite* CollisionRef;
 
-		bool CheckCollision(Collision* Other)
+		bool CheckCollision(Collision* Other, bool bNotify = true)
 		{
 			sf::Rect<int> IntersectingRect;
 			bool Intersects = false;
@@ -47,24 +47,40 @@ class Collision
 			bool** CData = ImageManager::RequestCollisionData(CollisionRef->getTexture());
 			bool** OtherCData = ImageManager::RequestCollisionData(Other->CollisionRef->getTexture());
 
-			for(int x = 0; x < IntersectingRect.width-1; x++)
+			bool** IntersectData = new bool *[IntersectingRect.width];
+			for(int x = 0; x < IntersectingRect.width; x++)
+				IntersectData[x] = new bool[IntersectingRect.height];
+
+			bool bCollided = false;
+			for(int x = 0; x < IntersectingRect.width; x++)
 			{
-				for(int y = 0; y < IntersectingRect.height-1; y++)
+				for(int y = 0; y < IntersectingRect.height; y++)
 				{
+					IntersectData[x][y] = false;
+
 					if(CData[x+BaggaOFF21.x][y+BaggaOFF21.y] && OtherCData[x+BaggaOFF2.x][y+BaggaOFF2.y])
 					{
-						CollidedWith(Other);
-						Other->CollidedWith(this);
-						return true;
+						IntersectData[x][y] = true;
+						bCollided = true;
 					}
 				}
 				//Util::msgNote("");
 			}
 
+			if(bCollided)
+			{
+				if(bNotify)
+				{
+					CollidedWith(Other, IntersectData);
+					Other->CollidedWith(this, IntersectData);
+				}
+				return true;
+			}
+
 			return false;
 		}
 
-		virtual void CollidedWith(Collision* Other)
+		virtual void CollidedWith(Collision* Other, bool** IntersectData)
 		{
 		}
 };

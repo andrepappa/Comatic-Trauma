@@ -2,6 +2,7 @@
 
 #include "StateLoading.h"
 #include "StateMenu.h"
+#include "LevelOne.h"
 
 #include "WiimoteBindings.h"
 int main(int argc, char* argv[])
@@ -14,7 +15,7 @@ int main(int argc, char* argv[])
 	//E->SetLoadingState(new StateLoading);
 	E->Init();
 	
-	E->QueueState(new StateMenu);
+	E->QueueState(new LevelOne);
 	while(E->Running())
 	{
 		E->Update();

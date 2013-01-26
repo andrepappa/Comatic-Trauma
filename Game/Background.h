@@ -4,8 +4,7 @@
 #include <SFML\Graphics.hpp>
 
 class Background :
-	public GameObject,
-	public Collision
+	public GameObject
 {
 public:
 	Background();
