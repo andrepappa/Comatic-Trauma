@@ -21,6 +21,14 @@ class Player :
 		void SetCamera(sf::View* Cam){ Camera = Cam; }
 
 	private:
+		enum ANIM_STATES
+		{
+			IDLE,
+			RUN,
+			JUMP,
+			FALL
+		} CurrentAnim;
+
 		AnimManager* AnimMgr;
 		int Anim_Idle, Anim_Run, Anim_Jump, Anim_Fall;
 		float Speed;

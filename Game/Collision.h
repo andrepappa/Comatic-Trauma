@@ -38,6 +38,7 @@ class Collision
 			else
 				return false;
 
+			
 			if(!Intersects)
 				return false;
 			

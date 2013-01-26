@@ -12,7 +12,7 @@ class AnimManager
 
 			for(int i = 0; i < amount; i++)
 			{
-				sf::IntRect* iR = new sf::IntRect((i%cols)*w, h*((int)(i/cols)) + (h*startRow), w, h);
+				sf::IntRect* iR = new sf::IntRect((i%cols)*w + (startCol*w), h*((int)(i/cols)) + (h*startRow), w, h);
 				Rects.push_back(iR);
 			}
 
@@ -61,6 +61,7 @@ class AnimManager
 			public:
 				Anim()
 				{
+					CurrentFrame = 0;
 					FrameDelay = 0;
 					Timer.restart();
 				}

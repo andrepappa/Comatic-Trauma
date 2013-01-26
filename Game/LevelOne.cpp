@@ -31,13 +31,13 @@ void LevelOne::Init()
 	{
 		std::string path;
 		path = Util::BuildString("Assets/GraphicalAssets/Smoke/Comp 2_00%03d.png", i);
-		m_SmokeBorder.push_back(ImageManager::RequestTexture(path));
+		//m_SmokeBorder.push_back(ImageManager::RequestTexture(path));
 	}
 
-	m_SmokeSprite = new sf::Sprite(*m_SmokeBorder[0]);
+	//m_SmokeSprite = new sf::Sprite(*m_SmokeBorder[0]);
 
 
-	m_SmokeSprite->setPosition(0, 0);
+	//m_SmokeSprite->setPosition(0, 0);
 //	StaticOverlay = new sf::Sprite(*ImageManager::RequestTexture("Assets/GraphicalAssets/Menu/Text.png"));
 //	StaticOverlay->setPosition(0,0);
 
@@ -67,6 +67,8 @@ void LevelOne::Init()
 
 void LevelOne::Update(sf::Time DeltaTime)
 {
+	BeatSound.Update();
+
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num1))
 		Camera->move(15, 0);
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num2))
@@ -89,9 +91,9 @@ void LevelOne::Update(sf::Time DeltaTime)
 			
 		}
 	}
-	Anims->Update();
-	if(Anims->NewFrame(BgAnimIndex))
-		m_SmokeSprite->setTexture(*m_SmokeBorder[Anims->CurFrame(BgAnimIndex)]);
+	//Anims->Update();
+	//if(Anims->NewFrame(BgAnimIndex))
+	//	m_SmokeSprite->setTexture(*m_SmokeBorder[Anims->CurFrame(BgAnimIndex)]);
 
 }
 
@@ -115,13 +117,14 @@ void LevelOne::HandleEvents(sf::Event EventHandle)
 void LevelOne::Draw(sf::RenderWindow* Window)
 {
 	Window->setView(*Camera);
-
+	Window->clear(sf::Color::White);
 	for (unsigned int i = 0; i < m_LOObjects.size(); i++)
 	{
 		m_LOObjects[i]->Draw(Window);
 	}
 	Window->setView(Window->getDefaultView());
 
-	Window->draw(*m_SmokeSprite);
+
+	//Window->draw(*m_SmokeSprite);
 
 }

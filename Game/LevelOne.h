@@ -5,8 +5,10 @@
 #include "Player.h"
 #include <iostream>
 #include "AnimManager.h"
+#include "Beat.h"
 
 
+#include "WiimoteBindings.h"
 class LevelOne :
 	public GameState
 {
@@ -19,6 +21,8 @@ public:
 	virtual void Draw(sf::RenderWindow* Window) override;
 
 protected:
+	wiimote_sample WiimoteBeatSound;
+	Beat BeatSound;
 	std::vector<GameObject*> m_LOObjects;
 	sf::View* Camera;
 	AnimManager* Anims;

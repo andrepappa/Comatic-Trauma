@@ -15,6 +15,8 @@ class StateMenu : public GameState
 		virtual void Draw(sf::RenderWindow* Window) override;
 
 	private:
+		sf::Font _Font;
+		sf::Text WiimoteConnectionStatus;
 		AnimManager* Anims;
 		sf::Sprite* Background;
 		sf::Sprite* Highlight;

@@ -6,7 +6,7 @@
 #include <SFML/System.hpp>
 
 wiimote WiimoteBindings::Wiimote;
-int WiimoteBindings::Timeout = 120000;
+int WiimoteBindings::Timeout = 10000;
 std::map<WiimoteKeys, bool> WiimoteBindings::KeyPressedStates;
 std::map<WiimoteKeys, bool> WiimoteBindings::KeyReleasedStates;
 
@@ -40,6 +40,18 @@ bool WiimoteBindings::connectWiimote()
 
 	Util::msgNote("Wiimote connected!");
 	return true;
+}
+
+void WiimoteBindings::playSample(wiimote_sample Snd)
+{
+	if(!Wiimote.IsConnected())
+		return;
+	if(Wiimote.ConnectionLost())
+		connectWiimote();
+
+	Wiimote.EnableSpeaker(true);
+	Wiimote.MuteSpeaker(false);
+	Wiimote.PlaySample(Snd);
 }
 
 bool WiimoteBindings::isDown(WiimoteKeys Key)

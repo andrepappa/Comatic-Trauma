@@ -6,9 +6,10 @@ Background::Background()
 {
 	Camera = nullptr;
 	ParallaxImage* PI = new ParallaxImage();
-	PI->Sprites[0] = new sf::Sprite(*ImageManager::RequestTexture("Assets/GraphicalAssets/level_jump_prototype.png"));
-	PI->Sprites[1] = new sf::Sprite(*ImageManager::RequestTexture("Assets/GraphicalAssets/level_jump_prototype.png"));
-	PI->Sprites[1]->setPosition(1280.0f, 0.0f);
+	PI->Sprites[0] = new sf::Sprite(*ImageManager::RequestTexture("Assets/GraphicalAssets/level_prototype_cloud.png"));
+	PI->Sprites[1] = new sf::Sprite(*ImageManager::RequestTexture("Assets/GraphicalAssets/level_prototype_cloud.png"));
+	PI->Sprites[0]->setPosition(0.0f, 0.0f);
+	PI->Sprites[1]->setPosition(4112.0f, 0.0f);
 	CollisionRef = PI->Sprites[0];
 	m_Backgrounds.push_back(PI);
 }
