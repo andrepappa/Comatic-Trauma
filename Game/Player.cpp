@@ -16,7 +16,6 @@ Player::Player()
 	std::vector<sf::IntRect*> Frames_Run = AnimManager::GetSubRects(199, 328, 8, 8, 0, 0);
 	std::vector<sf::IntRect*> Frames_Jump = AnimManager::GetSubRects(199, 328, 1, 8, 1, 1);
 
-
 	m_GOSprite = new sf::Sprite(*ImageManager::RequestTexture("Assets/GraphicalAssets/player.png"));
 	CollisionRef = m_GOSprite;
 	m_GOSprite->setPosition(250.0f, 400.0f);

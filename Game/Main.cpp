@@ -3,6 +3,7 @@
 #include "StateLoading.h"
 #include "StateMenu.h"
 #include "LevelOne.h"
+#include "LevelTest.h"
 #include "Beat.h"
 
 #include "WiimoteBindings.h"
@@ -20,7 +21,7 @@ int main(int argc, char* argv[])
 
 	E->Init();
 	
-	E->QueueState(new StateMenu);
+	E->QueueState(new LevelTest);
 	while(E->Running())
 	{
 		E->Update();
