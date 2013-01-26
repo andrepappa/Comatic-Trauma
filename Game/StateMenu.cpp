@@ -62,6 +62,7 @@ void StateMenu::Update(sf::Time DeltaTime)
 		{
 			PhoenixEngine::QueueState(new LevelOne);
 		}
+		else
 		{
 			PhoenixEngine::GetInstance()->Quit();
 		}

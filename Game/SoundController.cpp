@@ -76,11 +76,12 @@ void CSoundController::Update()
 	*/
 }
 
-void PlaySound(std::string path)
+void CSoundController::PlaySound(std::string path)
 {
 	sf::Sound MySound;
 	sf::SoundBuffer MyBuffer;
 	MyBuffer.loadFromFile(path);
 	MySound.setBuffer(MyBuffer);
 	MySound.play();
+	std::cout << "Play Actual Sound" << std::endl;
 }
