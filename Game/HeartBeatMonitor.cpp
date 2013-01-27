@@ -78,6 +78,7 @@ void HeartBeatMonitor::Update(sf::Time TimeDelta)
 					BeatInstance.BeatSound3.play();
 					FlatlineCheck = true;
 					bDead = true;
+					m_GOSprite->setTexture(*ImageManager::RequestTexture("Assets\\GraphicalAssets\\heart monitor_dead.png"));
 				}
 			}
 		}

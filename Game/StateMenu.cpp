@@ -10,7 +10,7 @@ void StateMenu::Init()
 {
 	Anims = new AnimManager;
 	std::vector<sf::IntRect*> Rects = Anims->GetSubRects(1280, 720, 60, 8, 0, 0);
-	Background = new sf::Sprite(*ImageManager::RequestTexture("Assets/GraphicalAssets/Front.png"));
+	Background = new sf::Sprite(*ImageManager::RequestTexture("Assets/GraphicalAssets/Front2.png"));
 	Background->setPosition(0, 0);
 	Highlight = new sf::Sprite(*ImageManager::RequestTexture("Assets/GraphicalAssets/High_light_START.png"));
 	Highlight->setPosition(30, 200);
