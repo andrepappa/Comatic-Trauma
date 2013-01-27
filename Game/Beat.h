@@ -11,8 +11,11 @@ public:
 
 	void Update();
 	sf::SoundBuffer MyBuffer;
+	sf::SoundBuffer MyBuffer2;
+	sf::SoundBuffer MyBuffer3;
 	sf::Sound BeatSound1;
 	sf::Sound BeatSound2;
+	sf::Sound BeatSound3;
 
 private:
 	CSoundController* SoundController;

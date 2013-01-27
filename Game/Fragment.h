@@ -22,6 +22,5 @@ private:
 	std::vector<sf::Texture*> FragTexture;
 	int FragIndex;
 
-
 };
 

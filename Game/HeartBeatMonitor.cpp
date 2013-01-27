@@ -6,7 +6,7 @@ HeartBeatMonitor::HeartBeatMonitor()
 {
 	/*std::vector<sf::IntRect*> Frames_Idle = AnimManager::GetSubRects(199, 328, 1, 8, 0, 0);*/
 	std::vector<sf::IntRect*> Rects = AnimManager::GetSubRects(300, 195, 30, 6, 0,0);
-	m_HeartBeatSpeed = 10;//31.915f;
+	m_HeartBeatSpeed = 10;
 	m_HBAnimManage = new AnimManager;
 	m_HBIndex = m_HBAnimManage->AddAnim(Rects, m_HeartBeatSpeed);
 	m_GOSprite = new sf::Sprite(*ImageManager::RequestTexture("Assets/GraphicalAssets/HeartMonitor.png"));
@@ -15,7 +15,8 @@ HeartBeatMonitor::HeartBeatMonitor()
 	StartPlaying = false;
 	counterbaggascheize = 0;
 	DoubleBeatClock.restart();
-	DoubleBeatCheck = false;
+	DoubleBeatCheck = true;
+	FlatlineCheck = false;
 }
 
 
@@ -38,7 +39,10 @@ void HeartBeatMonitor::Update(sf::Time TimeDelta)
 	{
 		if (!DoubleBeatCheck)
 		{
-			BeatInstance.BeatSound1.play();
+			if (m_HeartBeatSpeed<40)
+			{
+				BeatInstance.BeatSound1.play();
+			}
 		}
 		DoubleBeatCheck = true;
 	}
@@ -59,13 +63,30 @@ void HeartBeatMonitor::Update(sf::Time TimeDelta)
 		if (m_HBAnimManage->GetFrame(m_HBIndex)->top == 195 &&  m_HBAnimManage->GetFrame(m_HBIndex)->left == 1500 )
 		{
 			WiimoteBindings::setRumble(70);
-			BeatInstance.BeatSound1.play();
-			DoubleBeatClock.restart();
-			DoubleBeatCheck = false;
+			//BeatInstance.BeatSound2.play();
+			if (m_HeartBeatSpeed>30 && m_HeartBeatSpeed<50)
+			{
+				BeatInstance.BeatSound1.play();
+				DoubleBeatClock.restart();
+				DoubleBeatCheck = false;
+			}
+			if (m_HeartBeatSpeed>40)
+			{
+				if (!FlatlineCheck)
+				{
+					BeatInstance.BeatSound3.play();
+					FlatlineCheck = true;
+				}
+			}
 			//StartPlaying = true;
 //			m_HBAnimManage->ChangeFrameTime(m_HBIndex, 34);
-
-			counterbaggascheize++;
+		}
+		if (m_HBAnimManage->GetFrame(m_HBIndex)->top == 195*2 &&  m_HBAnimManage->GetFrame(m_HBIndex)->left == 600 )
+		{
+			if (m_HeartBeatSpeed<50)
+			{
+				BeatInstance.BeatSound2.play();
+			}
 		}
 //		std::cout << "\nDebug: "  << m_HBAnimManage->GetFrame(m_HBIndex)->top << "\t:" << m_HBAnimManage->GetFrame(m_HBIndex)->left << std::endl;
 

@@ -11,6 +11,7 @@
 #include <vector>
 Player::Player()
 {
+	GOType = PLAYER;
 	CameraBounds = sf::FloatRect(240, 150, 400, 420);
 	Camera = nullptr;
 	AnimMgr = new AnimManager();

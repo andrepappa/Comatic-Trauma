@@ -4,6 +4,7 @@
 
 Fragment::Fragment()
 {
+	GOType = FRAGMENT;
 	std::vector<sf::IntRect*> Rects;
 	FragAnim = new AnimManager;
 	for (unsigned int i = 0; i < 50; i++)

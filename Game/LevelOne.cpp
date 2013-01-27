@@ -53,12 +53,12 @@ void LevelOne::Init()
 	m_LOObjects.push_back(ThePlayer);
 	//m_LOObjects.push_back(BG);
 
+	RanFrag = new Fragment();
+	sf::Sprite* FragmntCrashRef = new sf::Sprite(*ImageManager::RequestTexture("Assets/GraphicalAssets/Fragments/Fragments0001.png"));
+	RanFrag->CollisionRef = FragmntCrashRef;
+	m_LOObjects.push_back(RanFrag);
 
-	//RanFrag = new Fragment();
-	//sf::Sprite* FragmntCrashRef = new sf::Sprite(*ImageManager::RequestTexture("Assets/GraphicalAssets/Fragments/Fragments0001.png"));
-	//RanFrag->CollisionRef = FragmntCrashRef;
-
-	//RanFrag->setPosition(500.0f, 200.0f);
+	RanFrag->setPosition(500.0f, 200.0f);
 
 	HealthTimerInterval = sf::milliseconds(200);
 	HealthTimer.restart();
@@ -92,8 +92,11 @@ void LevelOne::Update(sf::Time DeltaTime)
 			if (m_LOObjects[i]->CheckCollision(m_LOObjects[j]))
 			{
 				//std::cout << "We are colliding" << std::endl;
-				
-				 
+				if (m_LOObjects[i]->GOType == FRAGMENT && m_LOObjects[j]->GOType == PLAYER)
+				{
+					std::cout << "I CRASHED!" << std::endl;
+					Heartmon->SetBeatSpeed(10.0f);
+				}
 			}
 			
 		}

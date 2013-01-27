@@ -22,6 +22,7 @@ private:
 	float m_HeartBeatSpeed;
 	sf::Clock DoubleBeatClock;
 	bool DoubleBeatCheck;
+	bool FlatlineCheck;
 	AnimManager* m_HBAnimManage;
 //	sf::Sprite* m_HBSprite;
 	int m_HBIndex;

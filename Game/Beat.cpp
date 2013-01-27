@@ -11,8 +11,11 @@ Beat::Beat()
 	DoubleBeatTime = 82.0f;
 	DoubleBeatSwitch = false;
 	MyBuffer.loadFromFile("Beat.wav");
+	MyBuffer2.loadFromFile("Beep.ogg");
+	MyBuffer3.loadFromFile("Flatline.ogg");
 	BeatSound1.setBuffer(MyBuffer);
-	BeatSound2.setBuffer(MyBuffer);
+	BeatSound2.setBuffer(MyBuffer2);
+	BeatSound3.setBuffer(MyBuffer3);
 }
 
 
