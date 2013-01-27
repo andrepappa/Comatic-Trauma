@@ -63,11 +63,13 @@ void LevelOne::Init()
 	FP.push_back(sf::Vector2f(7712, 440));
 	FP.push_back(sf::Vector2f(8552, -230));
 	FP.push_back(sf::Vector2f(9297, 500));
-	FP.push_back(sf::Vector2f(10449, -230));
+	FP.push_back(sf::Vector2f(10249, 0));
 	FP.push_back(sf::Vector2f(11873, 86));
 	FP.push_back(sf::Vector2f(6082, 467));
-	FP.push_back(sf::Vector2f(7651, -150));
+	FP.push_back(sf::Vector2f(7451, -150));
 	FP.push_back(sf::Vector2f(10480, 359));
+
+	AllFragments = FP.size();
 
 	//Fragments 0 < X < 12000
 	//Fragments 0 < Y < 720
@@ -98,10 +100,27 @@ void LevelOne::Init()
 	FragmentSound.setBuffer(FragmentSoundBuffer);
 
 	LastEnemyHitTime = sf::Time();
+	CurrentFragments = 0;
+	bGameWon = false;
+
+	Flashes = new FlashBack();
 }
 
 void LevelOne::Update(sf::Time DeltaTime)
 {
+	Flashes->Update(DeltaTime);
+	if(CurrentFragments >= AllFragments && !bGameWon)
+	{
+		bGameWon = true;
+		GameWonTimer.restart();
+		std::cout << "WON\n";
+	}
+	if(bGameWon && GameWonTimer.getElapsedTime().asSeconds() >= 3.0f)
+	{
+		std::cout << "END\n";
+		PhoenixEngine::QueueState(new StateMenu);
+	}
+
 	Heartmon->Update(DeltaTime);
 	if(DeadRestartTimer.getElapsedTime().asSeconds() > 3.0f && bGameOver)
 	{
@@ -129,9 +148,12 @@ void LevelOne::Update(sf::Time DeltaTime)
 		Camera->move(-15, 0);
 
 	// movement update 
+	if(bGameOver || bGameWon)
+		ThePlayer->Update(DeltaTime);
 	for (unsigned int i = 0; i < m_LOObjects.size(); i++)
 	{
-		m_LOObjects[i]->Update(DeltaTime);
+		if(!bGameOver && !bGameWon)
+			m_LOObjects[i]->Update(DeltaTime);
 	}
 
 	for (unsigned int i = 0; i < m_LOObjects.size()-1; i++)
@@ -153,8 +175,11 @@ void LevelOne::Update(sf::Time DeltaTime)
 					//Fragment* F = new Fragment();
 					//F->setPosition(ThePlayer->getPos().x + 500, ThePlayer->getPos().y - 200);
 					//m_LOObjects.push_back(F);
+					CurrentFragments++;
 					Heartmon->SetBeatSpeed(5.0f);
 					ThePlayer->PowerChange(Heartmon->GetBeatSpeed());
+					Flashes->FlashScreen(false);
+					Flashes->ShowPicture(1);
 				}
 				else
 				{
@@ -166,6 +191,7 @@ void LevelOne::Update(sf::Time DeltaTime)
 							HitSound.play();
 							Heartmon->SetBeatSpeed(Heartmon->GetBeatSpeed()+5.0f);
 							ThePlayer->PowerChange(Heartmon->GetBeatSpeed());
+							Flashes->FlashScreen(true);
 
 							LastEnemyHitTime = EnemyHitProtection.getElapsedTime();
 						}
@@ -212,6 +238,7 @@ void LevelOne::Draw(sf::RenderWindow* Window)
 	Window->setView(Window->getDefaultView());
 	Heartmon->Draw(Window);
 	Window->draw(*m_SmokeSprite);
+	Flashes->Draw(Window);
 	//RanFrag->Draw(Window);
 }
 

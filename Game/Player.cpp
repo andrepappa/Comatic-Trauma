@@ -36,7 +36,7 @@ Player::Player()
 	Speed = 400;
 	Grav = 0;
 	Gravity = 30;
-	MaxJump = -1350;
+	MaxJump = -1150;
 	bTouchingGround = false;
 	bDead = false;
 }
@@ -49,7 +49,7 @@ Player::~Player()
 
 void Player::PowerChange(int HeartBeatSpeed)
 {
-	Speed = Util::Max(3000/HeartBeatSpeed, 10);
+	Speed = Util::Max(4000/HeartBeatSpeed, 10);
 	AnimMgr->ChangeFrameTime(Anim_Idle, 6.4f*HeartBeatSpeed);
 	AnimMgr->ChangeFrameTime(Anim_Run, 6.4f*HeartBeatSpeed);
 	AnimMgr->ChangeFrameTime(Anim_Jump, 6.4f*HeartBeatSpeed);

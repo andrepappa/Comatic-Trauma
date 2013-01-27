@@ -8,6 +8,7 @@
 
 sf::Sound SelectSound;
 sf::SoundBuffer SelectBuffer;
+
 void StateMenu::Init()
 {
 	Anims = new AnimManager;
@@ -113,6 +114,10 @@ void StateMenu::HandleEvents(sf::Event EventHandle)
 		}
 	}
 
+	if (EventHandle.type == sf::Event::KeyReleased && EventHandle.key.code == sf::Keyboard::F)
+	{
+		PhoenixEngine::GetWindow()->create(sf::VideoMode(1280, 720), "Comatic Trauma", sf::Style::Fullscreen);
+	}
 	if (EventHandle.type == sf::Event::KeyReleased && EventHandle.key.code == sf::Keyboard::W)
 	{
 		WPressed = false;

@@ -39,6 +39,7 @@ bool WiimoteBindings::connectWiimote()
 	}
 
 	Util::msgNote("Wiimote connected!");
+	WiimoteBindings::setLEDs(true, false, false, false);
 	return true;
 }
 

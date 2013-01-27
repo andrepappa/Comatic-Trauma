@@ -112,6 +112,7 @@ void PhoenixEngine::ChangeState()
 
 void PhoenixEngine::ToggleLoading(bool bToggle)
 {
+	sf::Context Cont;
 	if(m_LoadingState != nullptr)
 	{
 		if(bToggle)

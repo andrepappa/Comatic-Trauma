@@ -7,6 +7,7 @@
 #include "AnimManager.h"
 #include "HeartBeatMonitor.h"
 #include "Fragment.h"
+#include "FlashBack.h"
 
 class LevelOne :
 	public GameState
@@ -20,9 +21,14 @@ public:
 	virtual void Draw(sf::RenderWindow* Window) override;
 
 private:
+	FlashBack* Flashes;
+	int AllFragments;
+	int CurrentFragments;
 	sf::Clock EnemyHitProtection;
+	sf::Clock GameWonTimer;
 	sf::Time LastEnemyHitTime;
 	bool bGameOver;
+	bool bGameWon;
 	Player* ThePlayer;
 	sf::Clock HealthTimer;
 	sf::Clock DeadRestartTimer;
