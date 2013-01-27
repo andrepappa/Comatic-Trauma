@@ -82,9 +82,15 @@
   <ItemGroup>
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="Beat.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="Enemies.cpp" />
     <ClCompile Include="LevelOne.cpp" />
     <ClCompile Include="LevelTest.cpp" />
+=======
+    <ClCompile Include="Fragment.cpp" />
+    <ClCompile Include="HeartBeatMonitor.cpp" />
+    <ClCompile Include="LevelOne.cpp" />
+>>>>>>> Kommit græiset
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="Paralax.cpp" />
@@ -103,10 +109,17 @@
     <ClInclude Include="Background.h" />
     <ClInclude Include="Beat.h" />
     <ClInclude Include="Collision.h" />
+<<<<<<< HEAD
     <ClInclude Include="Enemies.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="LevelOne.h" />
     <ClInclude Include="LevelTest.h" />
+=======
+    <ClInclude Include="Fragment.h" />
+    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="HeartBeatMonitor.h" />
+    <ClInclude Include="LevelOne.h" />
+>>>>>>> Kommit græiset
     <ClInclude Include="Obstacle.h" />
     <ClInclude Include="Paralax.h" />
     <ClInclude Include="PhoenixEngine\Core\GameState.h" />

@@ -10,6 +10,9 @@ public:
 	~Beat();
 
 	void Update();
+	sf::SoundBuffer MyBuffer;
+	sf::Sound BeatSound1;
+	sf::Sound BeatSound2;
 
 private:
 	CSoundController* SoundController;
@@ -17,8 +20,5 @@ private:
 	sf::Clock DoubleBeat;
 	float DoubleBeatTime;
 	bool DoubleBeatSwitch;
-	sf::SoundBuffer MyBuffer;
-	sf::Sound BeatSound1;
-	sf::Sound BeatSound2;
 };
 
