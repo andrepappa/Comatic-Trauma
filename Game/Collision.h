@@ -17,7 +17,7 @@ class Collision
 
 		sf::Sprite* CollisionRef;
 
-		bool CheckCollision(Collision* Other, bool bNotify = true)
+		virtual bool CheckCollision(Collision* Other, bool bNotify = true)
 		{
 			sf::Rect<int> IntersectingRect;
 			bool Intersects = false;

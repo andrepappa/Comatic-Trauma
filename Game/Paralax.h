@@ -1,60 +1,22 @@
-<<<<<<< HEAD
 #pragma once
-#include "phoenixengine\core\gamestate.h"
-
+#include "GameObject.h"
 class Paralax :
-	public GameState
+	public GameObject
 {
 public:
+	Paralax();
 	~Paralax(void);
-
-	void Init();
 
 	virtual void Update(sf::Time DeltaTime) override;
 	virtual void HandleEvents(sf::Event EventHandle) override;
 	virtual void Draw(sf::RenderWindow* Window) override;
+	virtual bool CheckCollision(Collision* Other, bool bNotify = true) override;
+	sf::View* Camera;
 
 private:
-	sf::Sprite* m_FarBg;
-	sf::Sprite* m_MediumBg;
-	sf::Sprite* m_Foreground;
-
-	sf::View* LevelCamera;
-//	sf::View* FarCamera;
-//	sf::View* MidCamera;
-
-	float m_Speed;
-	float m_DirX;
-
+	sf::Vector2f LastCam;
+	sf::Sprite* m_FarBg, *m_FarBg2;
+	sf::Sprite* m_MediumBg, *m_MediumBg2;
+	sf::Sprite* m_Foreground, *m_Foreground2;
+	sf::Vector2f m_Far_Scroll, m_Medium_Scroll, m_Fore_Scroll;
 };
-
-=======
-#pragma once
-#include "phoenixengine\core\gamestate.h"
-class Paralax :
-	public GameState
-{
-public:
-	~Paralax(void);
-
-	void Init();
-
-	virtual void Update(sf::Time DeltaTime) override;
-	virtual void HandleEvents(sf::Event EventHandle) override;
-	virtual void Draw(sf::RenderWindow* Window) override;
-
-private:
-	sf::Sprite* m_FarBg;
-	sf::Sprite* m_MediumBg;
-	sf::Sprite* m_Foreground;
-
-	sf::View* LevelCamera;
-	sf::View* FarCamera;
-	sf::View* MidCamera;
-
-	float m_Speed;
-	float m_DirX;
-
-};
-
->>>>>>> leupdate

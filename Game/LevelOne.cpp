@@ -18,6 +18,7 @@ LevelOne::~LevelOne()
 
 void LevelOne::Init()
 {
+	Paralax* ParallaxBg = new Paralax();
 	Anims = new AnimManager;
 //	std::vector<sf::IntRect*> Rects = Anims->GetSubRects(1280, 720, 60, 19, 0, 0);
 //	BgAnimIndex = Anims->AddAnim(Rects, 66);
@@ -42,11 +43,13 @@ void LevelOne::Init()
 //	StaticOverlay->setPosition(0,0);
 
 	Camera = new sf::View(sf::FloatRect(0.0f, 0.0f, 1280.0f, 720.0f));
-	Background* BG = new Background;
-	BG->SetCamera(Camera);
+	ParallaxBg->Camera = Camera;
+	//Background* BG = new Background;
+	//BG->SetCamera(Camera);
 	Player* PL = new Player;
 	PL->SetCamera(Camera);
-	m_LOObjects.push_back(BG);
+	m_LOObjects.push_back(ParallaxBg);
+	//m_LOObjects.push_back(BG);
 
 	Obstacle* BoxCollTest = new Obstacle();
 	sf::Sprite* CrashTestDummy = new sf::Sprite(*ImageManager::RequestTexture("Assets/GraphicalAssets/ornate_small1.png"));

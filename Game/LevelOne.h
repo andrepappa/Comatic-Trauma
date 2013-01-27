@@ -9,6 +9,7 @@
 
 
 #include "WiimoteBindings.h"
+#include "Paralax.h"
 class LevelOne :
 	public GameState
 {
