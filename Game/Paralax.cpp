@@ -18,10 +18,10 @@ Paralax::Paralax()
 {
 	m_FarBg = new sf::Sprite(*ImageManager::RequestTexture("Assets/GraphicalAssets/background2.png"));
 	m_FarBg2 = new sf::Sprite(*ImageManager::RequestTexture("Assets/GraphicalAssets/background2.png"));
-	m_MediumBg = new sf::Sprite(*ImageManager::RequestTexture("Assets/GraphicalAssets/background2ochetthalvt.png"));
-	m_MediumBg2 = new sf::Sprite(*ImageManager::RequestTexture("Assets/GraphicalAssets/background2ochetthalvt.png"));
-	m_Foreground = new sf::Sprite(*ImageManager::RequestTexture("Assets/GraphicalAssets/Paralax/level_prototype_cloud.png"));
-	m_Foreground2 = new sf::Sprite(*ImageManager::RequestTexture("Assets/GraphicalAssets/Paralax/level_prototype_cloud.png"));
+	m_MediumBg = new sf::Sprite(*ImageManager::RequestTexture("Assets/GraphicalAssets/level prototype_midground.png"));
+	m_MediumBg2 = new sf::Sprite(*ImageManager::RequestTexture("Assets/GraphicalAssets/level prototype_midground.png"));
+	m_Foreground = new sf::Sprite(*ImageManager::RequestTexture("Assets/GraphicalAssets/level_prototype.png"));
+	m_Foreground2 = new sf::Sprite(*ImageManager::RequestTexture("Assets/GraphicalAssets/level_prototype.png"));
 
 	m_Foreground2->move(m_Foreground->getTextureRect().width, 0);
 	m_MediumBg2->move(m_MediumBg->getTextureRect().width, 0);
