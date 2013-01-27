@@ -2,7 +2,7 @@
 #include "gameobject.h"
 #include "AnimManager.h"
 
-
+#include "Player.h"
 class Enemies :
 	public GameObject
 {
@@ -14,13 +14,25 @@ public:
 	void Draw(sf::RenderWindow* window);
 	void HandleEvents(sf::Event EventHandle);
 
-	void setSprite(sf::Sprite* S){ m_GOSprite = S; }
+	void setPosition(sf::Vector2f Pos){ m_GOSprite->setPosition(Pos); } 
+	void setPlayer(Player* P){ PlayerTarget = P; }
+
+	bool CheckCollision(Collision* Other, bool bNotify /* = true */)
+	{
+		Player* P = dynamic_cast<Player*>(Other);
+		if(P == NULL)
+			return false;
+	}
 
 private:
 	AnimManager* AnimMgr;
-	int Anim_Idle, Anim_Run, Anim_Jump, Anim_Fall;
+	int EnemyAnim;
+	bool bLastDirWasLeft;
+	Player* PlayerTarget;
 
 	float Speed;
+	sf::Clock ReTargetTimer;
+	sf::Time ReTargetDelay;
 	sf::Vector2f target;
 };
 

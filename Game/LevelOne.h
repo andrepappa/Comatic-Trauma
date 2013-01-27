@@ -20,6 +20,8 @@ public:
 	virtual void Draw(sf::RenderWindow* Window) override;
 
 private:
+	sf::Clock EnemyHitProtection;
+	sf::Time LastEnemyHitTime;
 	bool bGameOver;
 	Player* ThePlayer;
 	sf::Clock HealthTimer;
@@ -33,6 +35,10 @@ private:
 	int BgAnimIndex;
 	std::vector<sf::Texture*> m_SmokeBorder;
 	sf::Sprite* m_SmokeSprite;
+	sf::Sound HitSound;
+	sf::SoundBuffer HitSoundBuffer;
+	sf::Sound FragmentSound;
+	sf::SoundBuffer FragmentSoundBuffer;
 	HeartBeatMonitor* Heartmon;
 	Fragment* RanFrag;
 

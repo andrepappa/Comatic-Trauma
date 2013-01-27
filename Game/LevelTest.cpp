@@ -22,7 +22,7 @@ void LevelTest::Init()
 
 	Enemies* Enemy = new Enemies();
 	sf::Sprite* EnemySprite = new sf::Sprite(*ImageManager::RequestTexture("Assets/GraphicalAssets/ship.png"));
-	Enemy->setSprite(EnemySprite);
+	//Enemy->setSprite(EnemySprite);
 	Enemy->CollisionRef = EnemySprite;
 	EnemySprite->setPosition(500.0f, 500.0f);
 	m_LOObjects.push_back(Enemy);

@@ -12,23 +12,18 @@ int main(int argc, char* argv[])
 {
 	PhoenixEngine* E = PhoenixEngine::GetInstance();
 	E->DESIRED_FPS = 100;
-	E->bVSYNC = true;
+	//E->bVSYNC = true;
 	E->WINDOW_TITLE = "Comatic Trauma";
 	E->RESOLUTION = sf::Vector2u(1280, 720);
 	//E->VID_FLAGS = sf::Style::Fullscreen;
-	//E->SetLoadingState(new StateLoading);
+	E->SetLoadingState(new StateLoading);
 
 	//	Beat BeatInstance;
 	sf::Music* MyMusic = new sf::Music;
 	MyMusic->openFromFile("Dox.ogg");
+	MyMusic->setVolume(20.f);
 	MyMusic->setLoop(true);
 	MyMusic->play();
-
-	bool MenuOn = false;
-	sf::Sound SelectSound;
-	sf::SoundBuffer SelectBuffer;
-	SelectBuffer.loadFromFile("Select.ogg");
-	SelectSound.setBuffer(SelectBuffer);
 
 	E->Init();
 	
@@ -36,15 +31,6 @@ int main(int argc, char* argv[])
 	while(E->Running())
 	{
 		E->Update();
-
-		if (!MenuOn)
-		{
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-			{
-				MenuOn = true;
-				SelectSound.play();
-			}
-		}
 
 		E->Draw();
 	}

@@ -1,11 +1,10 @@
-﻿Build started 2013-01-27 11:20:24.
+﻿Build started 2013-01-27 13:37:06.
      1>Project "C:\Users\Master Kenth\Documents\GitHub\Comatic-Trauma\Game\Game.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug\Game.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt StateMenu.cpp
-         StateMenu.cpp
-     1>c:\users\master kenth\documents\github\comatic-trauma\game\animmanager.h(89): warning C4018: '>=' : signed/unsigned mismatch
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt LevelOne.cpp
+         LevelOne.cpp
      1>c:\users\master kenth\documents\github\comatic-trauma\game\collision.h(27): warning C4244: '=' : conversion from 'const float' to 'int', possible loss of data
      1>c:\users\master kenth\documents\github\comatic-trauma\game\collision.h(28): warning C4244: '=' : conversion from 'const float' to 'int', possible loss of data
      1>c:\users\master kenth\documents\github\comatic-trauma\game\collision.h(31): warning C4244: '=' : conversion from 'const float' to 'int', possible loss of data
@@ -14,6 +13,12 @@
      1>c:\users\master kenth\documents\github\comatic-trauma\game\collision.h(45): warning C4244: 'argument' : conversion from 'const float' to 'int', possible loss of data
      1>c:\users\master kenth\documents\github\comatic-trauma\game\collision.h(46): warning C4244: 'argument' : conversion from 'const float' to 'int', possible loss of data
      1>c:\users\master kenth\documents\github\comatic-trauma\game\collision.h(46): warning C4244: 'argument' : conversion from 'const float' to 'int', possible loss of data
+     1>c:\users\master kenth\documents\github\comatic-trauma\game\animmanager.h(89): warning C4018: '>=' : signed/unsigned mismatch
+     1>c:\users\master kenth\documents\github\comatic-trauma\game\levelone.cpp(85): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\master kenth\documents\github\comatic-trauma\game\levelone.cpp(85): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\master kenth\documents\github\comatic-trauma\game\levelone.cpp(122): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\master kenth\documents\github\comatic-trauma\game\levelone.cpp(157): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\master kenth\documents\github\comatic-trauma\game\levelone.cpp(168): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
        ManifestResourceCompile:
          All outputs are up-to-date.
        Link:
@@ -50,4 +55,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:02.75
+Time Elapsed 00:00:02.18

@@ -6,6 +6,8 @@
 
 #include "WiimoteBindings.h"
 
+sf::Sound SelectSound;
+sf::SoundBuffer SelectBuffer;
 void StateMenu::Init()
 {
 	Anims = new AnimManager;
@@ -19,6 +21,8 @@ void StateMenu::Init()
 	SPressed = false;
 	UpPressed = false;
 	DownPressed = false;
+	SelectBuffer.loadFromFile("Select.ogg");
+	SelectSound.setBuffer(SelectBuffer);
 
 	MenuBuffer.loadFromFile("Menu.ogg");
 	MenuSound.setBuffer(MenuBuffer);
@@ -76,10 +80,12 @@ void StateMenu::Update(sf::Time DeltaTime)
 	{
 		if (Selected == 0)
 		{
+			SelectSound.play();
 			PhoenixEngine::QueueState(new LevelOne);
 		}
 		else
 		{
+			SelectSound.play();
 			PhoenixEngine::GetInstance()->Quit();
 		}
 	}

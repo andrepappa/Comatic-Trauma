@@ -31,13 +31,14 @@ Player::Player()
 	ImageManager::RequestTexture("Assets/GraphicalAssets/character02_2.png");
 	m_GOSprite->setTextureRect(*Frames_Idle[0]);
 	CollisionRef = m_GOSprite;
-	m_GOSprite->setPosition(230.0f, 100.0f);
+	m_GOSprite->setPosition(300.0f, 100.0f);
 
 	Speed = 400;
 	Grav = 0;
 	Gravity = 30;
-	MaxJump = -1450;
+	MaxJump = -1350;
 	bTouchingGround = false;
+	bDead = false;
 }
 
 
@@ -58,6 +59,8 @@ void Player::PowerChange(int HeartBeatSpeed)
 sf::IntRect INTRECT, INTRECT2;
 void Player::CollidedWith(Collision* Other, bool** IntersectData)
 {
+	if(bDead)
+		return;
 	Paralax* BG = dynamic_cast<Paralax*>(Other);
 	if(BG != NULL)
 	{
@@ -203,27 +206,8 @@ void Player::Update(sf::Time DeltaTime)
 	//	bTouchingGround = true;
 	//}
 
-	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || WiimoteBindings::isDown(UP))
-	{
-		m_GOSprite->move(-Speed*DeltaTime.asSeconds(), 0);
-		m_GOSprite->setTexture(*ImageManager::RequestTexture("Assets/GraphicalAssets/character02_2.png"));
-	}
-	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || WiimoteBindings::isDown(DOWN))
-	{
-		m_GOSprite->move(Speed*DeltaTime.asSeconds(), 0);
-		m_GOSprite->setTexture(*ImageManager::RequestTexture("Assets/GraphicalAssets/character02.png"));
-	}
-
-
 	if(Grav > 0 && !bTouchingGround)
 		CurrentAnim = FALL;
-
-	if((sf::Keyboard::isKeyPressed(sf::Keyboard::Space) || WiimoteBindings::isDown(ONE)) && bTouchingGround)
-	{
-		Grav = MaxJump;
-		bTouchingGround = false;
-		CurrentAnim = JUMP;
-	}
 
 	if(bTouchingGround && (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || WiimoteBindings::isDown(UP)))
 		CurrentAnim = RUN;
@@ -235,6 +219,31 @@ void Player::Update(sf::Time DeltaTime)
 	//	CurrentAnim = IDLE;
 	//else if((sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) && bTouchingGround)
 	//	CurrentAnim = RUN;
+
+
+	if(!bDead)
+	{
+		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || WiimoteBindings::isDown(UP))
+		{
+			m_GOSprite->move(-Speed*DeltaTime.asSeconds(), 0);
+			m_GOSprite->setTexture(*ImageManager::RequestTexture("Assets/GraphicalAssets/character02_2.png"));
+		}
+		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || WiimoteBindings::isDown(DOWN))
+		{
+			m_GOSprite->move(Speed*DeltaTime.asSeconds(), 0);
+			m_GOSprite->setTexture(*ImageManager::RequestTexture("Assets/GraphicalAssets/character02.png"));
+		}
+
+		if((sf::Keyboard::isKeyPressed(sf::Keyboard::Space) || WiimoteBindings::isDown(ONE)) && bTouchingGround)
+		{
+			Grav = MaxJump;
+			bTouchingGround = false;
+			CurrentAnim = JUMP;
+		}
+	}else
+	{
+		CurrentAnim = FALL;
+	}
 
 	/* Convert CameraBounds to global coords */
 	sf::Vector2f CameraBoundsGlobalCoords = PhoenixEngine::GetWindow()->convertCoords(sf::Vector2i(CameraBounds.left, CameraBounds.top), *Camera);

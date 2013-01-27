@@ -47,16 +47,16 @@ void HeartBeatMonitor::Update(sf::Time TimeDelta)
 		}
 		DoubleBeatCheck = true;
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-	{
-		m_HeartBeatSpeed ++;
-		m_HBAnimManage->ChangeFrameTime(m_HBIndex, m_HeartBeatSpeed);
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-	{
-		m_HeartBeatSpeed --;
-		m_HBAnimManage->ChangeFrameTime(m_HBIndex, m_HeartBeatSpeed);
-	}
+	//if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+	//{
+	//	m_HeartBeatSpeed ++;
+	//	m_HBAnimManage->ChangeFrameTime(m_HBIndex, m_HeartBeatSpeed);
+	//}
+	//if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+	//{
+	//	m_HeartBeatSpeed --;
+	//	m_HBAnimManage->ChangeFrameTime(m_HBIndex, m_HeartBeatSpeed);
+	//}
 	//std::cout << m_HeartBeatSpeed << std::endl;
 	if(m_HBAnimManage->NewFrame(m_HBIndex))
 	{
@@ -78,7 +78,7 @@ void HeartBeatMonitor::Update(sf::Time TimeDelta)
 					BeatInstance.BeatSound3.play();
 					FlatlineCheck = true;
 					bDead = true;
-					m_GOSprite->setTexture(*ImageManager::RequestTexture("Assets\\GraphicalAssets\\heart monitor_dead.png"));
+					m_GOSprite->setTexture(*ImageManager::RequestTexture("Assets\\GraphicalAssets\\heart monitor_dead01.png"));
 				}
 			}
 		}

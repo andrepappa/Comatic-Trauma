@@ -21,6 +21,7 @@ class Player :
 		void SetCamera(sf::View* Cam){ Camera = Cam; }
 		sf::Vector2f getPos(){ return m_GOSprite->getPosition(); }
 
+		bool bDead;
 	private:
 		enum ANIM_STATES
 		{

@@ -6,8 +6,8 @@
 #include "PhoenixEngine\Core\ImageManager.h"
 #include "Obstacle.h"
 #include "Paralax.h"
-#include <algorithm>
 #include "Player.h"
+#include "Enemies.h"
 
 LevelOne::~LevelOne() 
 {
@@ -41,8 +41,6 @@ void LevelOne::Init()
 
 
 	m_SmokeSprite->setPosition(0, 0);
-//	StaticOverlay = new sf::Sprite(*ImageManager::RequestTexture("Assets/GraphicalAssets/Menu/Text.png"));
-//	StaticOverlay->setPosition(0,0);
 
 	Camera = new sf::View(sf::FloatRect(0.0f, 0.0f, 1280.0f, 720.0f));
 	ParallaxBg->Camera = Camera;
@@ -52,19 +50,54 @@ void LevelOne::Init()
 	ThePlayer->SetCamera(Camera);
 	m_LOObjects.push_back(ParallaxBg);
 	m_LOObjects.push_back(ThePlayer);
-	//m_LOObjects.push_back(BG);
 
+	std::vector<sf::Vector2f> FP;
 
-	for(int i = 0; i < 50; i++)
+	FP.push_back(sf::Vector2f(1116, 300));
+	FP.push_back(sf::Vector2f(1760, 600));
+	FP.push_back(sf::Vector2f(2245, 535));
+	FP.push_back(sf::Vector2f(2967, 558));
+	FP.push_back(sf::Vector2f(3991, 210));
+	FP.push_back(sf::Vector2f(3792, -230));
+	FP.push_back(sf::Vector2f(5466, 83));
+	FP.push_back(sf::Vector2f(7712, 440));
+	FP.push_back(sf::Vector2f(8552, -230));
+	FP.push_back(sf::Vector2f(9297, 500));
+	FP.push_back(sf::Vector2f(10449, -230));
+	FP.push_back(sf::Vector2f(11873, 86));
+	FP.push_back(sf::Vector2f(6082, 467));
+	FP.push_back(sf::Vector2f(7651, -150));
+	FP.push_back(sf::Vector2f(10480, 359));
+
+	//Fragments 0 < X < 12000
+	//Fragments 0 < Y < 720
+
+	for(unsigned int i = 0; i < FP.size(); i++)
 	{
 		Fragment* Frag = new Fragment();
-		Frag->setPosition((rand()%4000)-2000, (rand()%1000)-500);
+		Frag->setPosition(FP[i].x, FP[i].y);
 		m_LOObjects.push_back(Frag);
+	}
+
+	for(unsigned int i = 0; i < 5; i++)
+	{
+		Enemies* Enemy = new Enemies();
+		Enemy->setPosition(sf::Vector2f(rand()%12000, rand()&720));
+		Enemy->setPlayer(ThePlayer);
+		m_LOObjects.push_back(Enemy);
 	}
 
 	HealthTimerInterval = sf::milliseconds(200);
 	HealthTimer.restart();
 	bGameOver = false;
+
+
+	HitSoundBuffer.loadFromFile("Hit.ogg");
+	HitSound.setBuffer(HitSoundBuffer);
+	FragmentSoundBuffer.loadFromFile("Fragment.ogg");
+	FragmentSound.setBuffer(FragmentSoundBuffer);
+
+	LastEnemyHitTime = sf::Time();
 }
 
 void LevelOne::Update(sf::Time DeltaTime)
@@ -79,6 +112,7 @@ void LevelOne::Update(sf::Time DeltaTime)
 		DeadRestartTimer.restart();
 		Heartmon->SetBeatSpeed(40.f);
 		bGameOver = true;
+		ThePlayer->bDead = true;
 	}
 
 	if(HealthTimer.getElapsedTime() > HealthTimerInterval)
@@ -99,6 +133,7 @@ void LevelOne::Update(sf::Time DeltaTime)
 	{
 		m_LOObjects[i]->Update(DeltaTime);
 	}
+
 	for (unsigned int i = 0; i < m_LOObjects.size()-1; i++)
 	{
 		for (unsigned int j = (i+1); j < m_LOObjects.size(); j++)
@@ -112,15 +147,35 @@ void LevelOne::Update(sf::Time DeltaTime)
 
 				if (P != NULL && Frag != NULL)
 				{
+					FragmentSound.play();
 					delete Frag;
 					m_LOObjects.erase(m_LOObjects.begin() + j);
+					//Fragment* F = new Fragment();
+					//F->setPosition(ThePlayer->getPos().x + 500, ThePlayer->getPos().y - 200);
+					//m_LOObjects.push_back(F);
 					Heartmon->SetBeatSpeed(5.0f);
 					ThePlayer->PowerChange(Heartmon->GetBeatSpeed());
+				}
+				else
+				{
+					Enemies* Enemy = dynamic_cast<Enemies*>(m_LOObjects[j]);
+					if(P != NULL && Enemy != NULL)
+					{
+						if(EnemyHitProtection.getElapsedTime() - LastEnemyHitTime >= sf::seconds(1))
+						{
+							HitSound.play();
+							Heartmon->SetBeatSpeed(Heartmon->GetBeatSpeed()+5.0f);
+							ThePlayer->PowerChange(Heartmon->GetBeatSpeed());
+
+							LastEnemyHitTime = EnemyHitProtection.getElapsedTime();
+						}
+					}
 				}
 			}
 			
 		}
 	}
+
 	Anims->Update();
 	if(Anims->NewFrame(BgAnimIndex))
 		m_SmokeSprite->setTexture(*m_SmokeBorder[Anims->CurFrame(BgAnimIndex)]);
