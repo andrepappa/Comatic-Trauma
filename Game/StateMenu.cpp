@@ -20,6 +20,9 @@ void StateMenu::Init()
 	UpPressed = false;
 	DownPressed = false;
 
+	MenuBuffer.loadFromFile("Menu.ogg");
+	MenuSound.setBuffer(MenuBuffer);
+
 	_Font.loadFromFile("C_BOX.TTF");
 	WiimoteConnectionStatus.setFont(_Font);
 	WiimoteConnectionStatus.setCharacterSize(18);
@@ -40,6 +43,7 @@ void StateMenu::Update(sf::Time DeltaTime)
 		if (!WPressed && !SPressed && !UpPressed && !DownPressed)
 		{
 			Selected = !Selected;
+			MenuSound.play();
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 		{

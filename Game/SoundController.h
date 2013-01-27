@@ -11,7 +11,7 @@ public:
 	~CSoundController();
 
 	sf::SoundBuffer applyFilter(float val, std::string path);
-	void PlaySound(std::string path);
+	void PlayChosenSound(std::string path);
 	void Update();
 
 private:
@@ -20,6 +20,7 @@ private:
 	sf::Time offSet;
 	float dovReduce;
 	unsigned int musicCounter;
+	sf::Music* MyMusic;
 	sf::Sound* MySound;
 	sf::SoundBuffer MyBuffer;
 	sf::SoundBuffer* firstBuffer;

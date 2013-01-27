@@ -1,7 +1,7 @@
 #pragma once
 
 #include "PhoenixEngine/Core/GameState.h"
-
+#include "SoundController.h"
 #include <SFML/Graphics.hpp>
 #include "AnimManager.h"
 class StateMenu : public GameState
@@ -18,6 +18,8 @@ class StateMenu : public GameState
 		sf::Font _Font;
 		sf::Text WiimoteConnectionStatus;
 		AnimManager* Anims;
+		sf::Sound MenuSound;
+		sf::SoundBuffer MenuBuffer;
 		sf::Sprite* Background;
 		sf::Sprite* Highlight;
 		bool Selected;

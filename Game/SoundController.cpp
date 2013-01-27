@@ -4,7 +4,7 @@
 
 CSoundController::CSoundController()
 {
-	MySound = new sf::Sound;
+	MyMusic = new sf::Music;
 	firstBuffer = new sf::SoundBuffer;
 	targetTemp = new sf::Sound;
 	tempBuffer = new sf::SoundBuffer;
@@ -76,12 +76,11 @@ void CSoundController::Update()
 	*/
 }
 
-void CSoundController::PlaySound(std::string path)
+void CSoundController::PlayChosenSound(std::string path)
 {
 	sf::Sound MySound;
 	sf::SoundBuffer MyBuffer;
 	MyBuffer.loadFromFile(path);
 	MySound.setBuffer(MyBuffer);
 	MySound.play();
-	std::cout << "Play Actual Sound" << std::endl;
 }
