@@ -72,6 +72,7 @@ sf::Texture* ImageManager::RequestTexture(std::string Path, bool bLoadAsTexture,
 		TexObj->CData = nullptr;
 	}
 
+	Tex->setSmooth(false);
 	TexObj->Texture = Tex;
 	TexObj->bPersistent = bPersistent;
 	TexObj->Path = Path;

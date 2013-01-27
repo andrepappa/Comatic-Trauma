@@ -15,6 +15,7 @@ public:
 	virtual void Draw(sf::RenderWindow* Window);
 
 	void SetBeatSpeed(float HeartBeatSpeed);
+	float GetBeatSpeed(){ return m_HeartBeatSpeed; }
 
 private:
 	Beat BeatInstance;

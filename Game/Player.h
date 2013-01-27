@@ -17,7 +17,7 @@ class Player :
 		virtual void Draw(sf::RenderWindow* Window) override;
 
 		void CollidedWith(Collision* Other, bool** IntersectData);
-
+		void PowerChange(int HeartBeatSpeed);
 		void SetCamera(sf::View* Cam){ Camera = Cam; }
 
 	private:

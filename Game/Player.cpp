@@ -30,10 +30,11 @@ Player::Player()
 	m_GOSprite->setTextureRect(*Frames_Idle[0]);
 	CollisionRef = m_GOSprite;
 	m_GOSprite->setPosition(250.0f, 100.0f);
+
 	Speed = 400;
 	Grav = 0;
-	Gravity = 40;
-	MaxJump = -1000;
+	Gravity = 30;
+	MaxJump = -1450;
 	bTouchingGround = false;
 }
 
@@ -41,6 +42,15 @@ Player::Player()
 Player::~Player()
 {
 	delete m_GOSprite;
+}
+
+void Player::PowerChange(int HeartBeatSpeed)
+{
+	Speed = Util::Max(3000/HeartBeatSpeed, 10);
+	AnimMgr->ChangeFrameTime(Anim_Idle, 6.4f*HeartBeatSpeed);
+	AnimMgr->ChangeFrameTime(Anim_Run, 6.4f*HeartBeatSpeed);
+	AnimMgr->ChangeFrameTime(Anim_Jump, 6.4f*HeartBeatSpeed);
+	AnimMgr->ChangeFrameTime(Anim_Fall, 6.4f*HeartBeatSpeed);
 }
 
 sf::IntRect INTRECT, INTRECT2;

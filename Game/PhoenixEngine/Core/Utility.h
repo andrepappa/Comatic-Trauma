@@ -28,6 +28,15 @@ enum CON_COLOR
 
 namespace Util
 {
+	inline float Min(float a, float b)
+	{
+		return (a < b) ? a : b;
+	}
+	inline float Max(float a, float b)
+	{
+		return (a > b) ? a : b;
+	}
+
 	inline void PrintColor(std::string print, CON_COLOR color, std::ostream* out = &std::cout)
 	{
 		HANDLE hstdout = GetStdHandle(STD_OUTPUT_HANDLE);

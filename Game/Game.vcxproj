@@ -84,6 +84,8 @@
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="Beat.cpp" />
     <ClCompile Include="Enemies.cpp" />
+    <ClCompile Include="Fragment.cpp" />
+    <ClCompile Include="HeartBeatMonitor.cpp" />
     <ClCompile Include="LevelOne.cpp" />
     <ClCompile Include="LevelTest.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -105,7 +107,9 @@
     <ClInclude Include="Beat.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="Enemies.h" />
+    <ClInclude Include="Fragment.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="HeartBeatMonitor.h" />
     <ClInclude Include="LevelOne.h" />
     <ClInclude Include="LevelTest.h" />
     <ClInclude Include="Obstacle.h" />
