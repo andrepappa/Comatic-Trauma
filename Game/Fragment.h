@@ -19,7 +19,6 @@ public:
 private:
 	AnimManager* FragAnim;
 	sf::Sprite* FragSprite;
-	std::vector<sf::Texture*> FragTexture;
 	int FragIndex;
 
 };

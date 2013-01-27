@@ -19,6 +19,7 @@ class Player :
 		void CollidedWith(Collision* Other, bool** IntersectData);
 		void PowerChange(int HeartBeatSpeed);
 		void SetCamera(sf::View* Cam){ Camera = Cam; }
+		sf::Vector2f getPos(){ return m_GOSprite->getPosition(); }
 
 	private:
 		enum ANIM_STATES

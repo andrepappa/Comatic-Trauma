@@ -17,6 +17,7 @@ HeartBeatMonitor::HeartBeatMonitor()
 	DoubleBeatClock.restart();
 	DoubleBeatCheck = true;
 	FlatlineCheck = false;
+	bDead = false;
 }
 
 
@@ -39,7 +40,7 @@ void HeartBeatMonitor::Update(sf::Time TimeDelta)
 	{
 		if (!DoubleBeatCheck)
 		{
-			if (m_HeartBeatSpeed<40)
+			if (m_HeartBeatSpeed<=40)
 			{
 				BeatInstance.BeatSound1.play();
 			}
@@ -64,7 +65,7 @@ void HeartBeatMonitor::Update(sf::Time TimeDelta)
 		{
 			WiimoteBindings::setRumble(70);
 			//BeatInstance.BeatSound2.play();
-			if (m_HeartBeatSpeed>30 && m_HeartBeatSpeed<50)
+			if (m_HeartBeatSpeed>30 && m_HeartBeatSpeed<=40)
 			{
 				BeatInstance.BeatSound1.play();
 				DoubleBeatClock.restart();
@@ -76,10 +77,9 @@ void HeartBeatMonitor::Update(sf::Time TimeDelta)
 				{
 					BeatInstance.BeatSound3.play();
 					FlatlineCheck = true;
+					bDead = true;
 				}
 			}
-			//StartPlaying = true;
-//			m_HBAnimManage->ChangeFrameTime(m_HBIndex, 34);
 		}
 		if (m_HBAnimManage->GetFrame(m_HBIndex)->top == 195*2 &&  m_HBAnimManage->GetFrame(m_HBIndex)->left == 600 )
 		{
@@ -88,13 +88,6 @@ void HeartBeatMonitor::Update(sf::Time TimeDelta)
 				BeatInstance.BeatSound2.play();
 			}
 		}
-//		std::cout << "\nDebug: "  << m_HBAnimManage->GetFrame(m_HBIndex)->top << "\t:" << m_HBAnimManage->GetFrame(m_HBIndex)->left << std::endl;
-
-//		if (m_HBAnimManage->GetFrame(m_HBIndex)->top == 195*4 &&  m_HBAnimManage->GetFrame(m_HBIndex)->left == 1500)
-//		{
-//			StartPlaying = false;
-////			m_HBAnimManage->ChangeFrameTime(m_HBIndex, 31);
-//		}
 
 		if (StartPlaying)
 			BeatInstance.Update();

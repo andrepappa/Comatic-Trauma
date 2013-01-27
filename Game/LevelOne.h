@@ -20,8 +20,10 @@ public:
 	virtual void Draw(sf::RenderWindow* Window) override;
 
 private:
+	bool bGameOver;
 	Player* ThePlayer;
 	sf::Clock HealthTimer;
+	sf::Clock DeadRestartTimer;
 	sf::Time HealthTimerInterval;
 	std::vector<GameObject*> m_LOObjects;
 	sf::View* Camera;

@@ -17,6 +17,7 @@ public:
 	void SetBeatSpeed(float HeartBeatSpeed);
 	float GetBeatSpeed(){ return m_HeartBeatSpeed; }
 
+	bool bDead;
 private:
 	Beat BeatInstance;
 	float m_HeartBeatSpeed;

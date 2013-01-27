@@ -5,6 +5,7 @@
 #include <iostream>
 #include "Background.h"
 #include "Paralax.h"
+#include "Fragment.h"
 
 #include "WiimoteBindings.h"
 
@@ -30,7 +31,7 @@ Player::Player()
 	ImageManager::RequestTexture("Assets/GraphicalAssets/character02_2.png");
 	m_GOSprite->setTextureRect(*Frames_Idle[0]);
 	CollisionRef = m_GOSprite;
-	m_GOSprite->setPosition(250.0f, 100.0f);
+	m_GOSprite->setPosition(230.0f, 100.0f);
 
 	Speed = 400;
 	Grav = 0;
@@ -58,7 +59,6 @@ sf::IntRect INTRECT, INTRECT2;
 void Player::CollidedWith(Collision* Other, bool** IntersectData)
 {
 	Paralax* BG = dynamic_cast<Paralax*>(Other);
-
 	if(BG != NULL)
 	{
 		sf::Rect<int> IntersectingRect;
@@ -118,6 +118,8 @@ void Player::CollidedWith(Collision* Other, bool** IntersectData)
 
 		if(bFloor)
 			bTouchingGround = true;
+		else
+			bTouchingGround = false;
 
 		while(CheckCollision(Other, false))
 		{
@@ -195,11 +197,11 @@ void Player::Update(sf::Time DeltaTime)
 	m_GOSprite->move(0, Grav*DeltaTime.asSeconds());
 	Grav += Gravity;
 
-	if(m_GOSprite->getPosition().y > 1750)
-	{
-		Grav = 0;
-		bTouchingGround = true;
-	}
+	//if(m_GOSprite->getPosition().y > 1750)
+	//{
+	//	Grav = 0;
+	//	bTouchingGround = true;
+	//}
 
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || WiimoteBindings::isDown(UP))
 	{

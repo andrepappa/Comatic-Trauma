@@ -7,6 +7,7 @@
 #include "Obstacle.h"
 #include "Paralax.h"
 #include <algorithm>
+#include "Player.h"
 
 LevelOne::~LevelOne() 
 {
@@ -53,19 +54,33 @@ void LevelOne::Init()
 	m_LOObjects.push_back(ThePlayer);
 	//m_LOObjects.push_back(BG);
 
-	RanFrag = new Fragment();
-	sf::Sprite* FragmntCrashRef = new sf::Sprite(*ImageManager::RequestTexture("Assets/GraphicalAssets/Fragments/Fragments0001.png"));
-	RanFrag->CollisionRef = FragmntCrashRef;
-	m_LOObjects.push_back(RanFrag);
 
-	RanFrag->setPosition(500.0f, 200.0f);
+	for(int i = 0; i < 50; i++)
+	{
+		Fragment* Frag = new Fragment();
+		Frag->setPosition((rand()%4000)-2000, (rand()%1000)-500);
+		m_LOObjects.push_back(Frag);
+	}
 
 	HealthTimerInterval = sf::milliseconds(200);
 	HealthTimer.restart();
+	bGameOver = false;
 }
 
 void LevelOne::Update(sf::Time DeltaTime)
 {
+	Heartmon->Update(DeltaTime);
+	if(DeadRestartTimer.getElapsedTime().asSeconds() > 3.0f && bGameOver)
+	{
+		PhoenixEngine::QueueState(new LevelOne);
+	}
+	if(!bGameOver && (Heartmon->bDead || ThePlayer->getPos().y >= 750))
+	{
+		DeadRestartTimer.restart();
+		Heartmon->SetBeatSpeed(40.f);
+		bGameOver = true;
+	}
+
 	if(HealthTimer.getElapsedTime() > HealthTimerInterval)
 	{
 		HealthTimer.restart();
@@ -73,7 +88,6 @@ void LevelOne::Update(sf::Time DeltaTime)
 		ThePlayer->PowerChange(Heartmon->GetBeatSpeed());
 	}
 
-	Heartmon->Update(DeltaTime);
 	//RanFrag->Update(DeltaTime);
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num1))
 		Camera->move(15, 0);
@@ -92,10 +106,16 @@ void LevelOne::Update(sf::Time DeltaTime)
 			if (m_LOObjects[i]->CheckCollision(m_LOObjects[j]))
 			{
 				//std::cout << "We are colliding" << std::endl;
-				if (m_LOObjects[i]->GOType == FRAGMENT && m_LOObjects[j]->GOType == PLAYER)
+
+				Player* P = dynamic_cast<Player*>(m_LOObjects[i]);
+				Fragment* Frag = dynamic_cast<Fragment*>(m_LOObjects[j]);
+
+				if (P != NULL && Frag != NULL)
 				{
-					std::cout << "I CRASHED!" << std::endl;
-					Heartmon->SetBeatSpeed(10.0f);
+					delete Frag;
+					m_LOObjects.erase(m_LOObjects.begin() + j);
+					Heartmon->SetBeatSpeed(5.0f);
+					ThePlayer->PowerChange(Heartmon->GetBeatSpeed());
 				}
 			}
 			
@@ -109,6 +129,8 @@ void LevelOne::Update(sf::Time DeltaTime)
 
 void LevelOne::HandleEvents(sf::Event EventHandle)
 {
+	if(bGameOver)
+		return;
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 	{
 		PhoenixEngine::GetInstance()->QueueState(new StateMenu);

@@ -5,17 +5,12 @@
 Fragment::Fragment()
 {
 	GOType = FRAGMENT;
-	std::vector<sf::IntRect*> Rects;
 	FragAnim = new AnimManager;
-	for (unsigned int i = 0; i < 50; i++)
-	{
-		Rects.push_back(nullptr);
-		std::string path;
-		path = Util::BuildString("Assets/GraphicalAssets/Fragments/Fragments00%02d.png", i);
-		FragTexture.push_back(ImageManager::RequestTexture(path));
-	}
+	std::vector<sf::IntRect*> Rects = AnimManager::GetSubRects(58, 63, 50, 8, 0, 0);
 	FragIndex = FragAnim->AddAnim(Rects, 32);
-	FragSprite = new sf::Sprite(*FragTexture[0]);
+	FragSprite = new sf::Sprite(*ImageManager::RequestTexture("Assets\\GraphicalAssets\\FragmentSprite.png"));
+	FragSprite->setTextureRect(*Rects[0]);
+	CollisionRef = FragSprite;
 	setPosition(50.0f, 50.0f);
 }
 
@@ -34,7 +29,7 @@ void Fragment::Update(sf::Time DeltaTime)
 
 	FragAnim->Update();
 	if(FragAnim->NewFrame(FragIndex))
-		FragSprite->setTexture(*FragTexture[FragAnim->CurFrame(FragIndex)]);
+		FragSprite->setTextureRect(*FragAnim->GetFrame(FragIndex));
 
 }
 
